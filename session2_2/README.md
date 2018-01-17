@@ -37,6 +37,9 @@ There is some example code for you to use in the file `mersenne.py` (this python
 
 Identify the following:
 1. The current implementation refers to the data for the random number generator in many lines.  Identify each line of code where this happens.
+
+The entire function [random number].
+
 2. If we are using a random number generator, what functionality do we actually care about?
 
 Program the following:
