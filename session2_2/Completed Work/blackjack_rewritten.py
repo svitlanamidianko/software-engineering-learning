@@ -1,5 +1,4 @@
 import itertools
-from translator import translator, trans_init, _
 
 class Card(object):
 
@@ -77,7 +76,7 @@ class CardDeck(object):
         else:
             return cards.pop(position)
 
-    def pop_rand(self, rand_method, x, c, m):
+    def pop_rand(self, rand_method = 'randu'):
         ''' This element returns a random card from a given list of cards.  
 
         Input:
@@ -86,11 +85,21 @@ class CardDeck(object):
           x2: variable for use in the generation of random numbers.
         ''' 
 
-        # Modify the code here for abstraction!
+        # Constants given by the RANDU algorithm:
+        # https://en.wikipedia.org/wiki/RANDU
 
-        rand_num = random_number(x, c, m)
+        if rand_method.lower() == 'randu':
+            if not '__randUfunction' in globals():
+                __randUfunction = randU()
+            rand_index = __randUfunction.randint(len(self.cards))
+        # elif args.rand_method.lower() == 'mersenne':
+        #     if not '__Mersennefunction' in globals():
+        #         __Mersennefunction = Mersenne()
+        #     x1 = __Mersennefunction.randint(len(deck))
+        else:
+            raise Exception('Unknown randomization method: ' + rand_method)   
 
-        return self.cards.pop(rand_num % len(self.cards))
+        return self.cards.pop(rand_index)
 
     def blackjack_value(self):
         '''Calculate the maximal value of a given hand in Blackjack.    
@@ -112,18 +121,122 @@ class CardDeck(object):
             return -1
         else:
             return final_value
-
-def random_number(x, c, m):
+        
+class randU(object):
     ''' Produce a random number using the Park-Miller method.
+
     See http://www.firstpr.com.au/dsp/rand31/ for further details of this
     method. It is recommended to use the returned value as the value for x1,
     when next calling the method.'''
-    return abs((c * x) % m)
+    __c = 65539
+    __m = 2147483648
+
+    def __init__(self):
+        from datetime import datetime
+
+        self.seed = int((datetime.utcnow() - datetime.min).total_seconds())
+        
+    def randint(self, upper_limit = None):
+        if upper_limit == None:
+            upper_limit = self.__m
+           
+        self.seed = (self.__c * self.seed) % self.__m
+        return self.seed % upper_limit
+
+class Mersenne(object):
+    """ 
+    Based on the pseudocode in https://en.wikipedia.org/wiki/Mersenne_Twister.
+    Modified by Philip Sterne <psterne at minervaproject dot com>
+    """
+
+    bitmask_1 = (2**32) - 1  # To get last 32 bits
+    bitmask_2 = 2**31  # To get 32nd bit
+    bitmask_3 = (2**31) - 1  # To get last 31 bits
+
+    def __init__(self):
+        from datetime import datetime
+
+        self.seed = int((datetime.utcnow() - datetime.min).total_seconds())
+        (self.MT, self.index) = self.__initialize_generator(self.seed)
+
+    def randint(self, upper_limit = 2**31):
+        (self.MT, self.index, self.y) = self.__extract_number(self.MT, self.index)
+        return self.y % upper_limit
+
+    def __initialize_generator(self, seed):
+        "Initialize the generator from a seed"
+        # Create a length 624 list to store the state of the generator
+        MT = [0 for i in range(624)]
+        index = 0
+        MT[0] = seed
+        for i in range(1, 624):
+            MT[i] = ((1812433253 * MT[i - 1]) ^ (
+                (MT[i - 1] >> 30) + i)) & self.bitmask_1
+        return (MT, index)  
+    
+    def __generate_numbers(self, MT):
+        "Generate an array of 624 untempered numbers"
+        for i in range(624):
+            y = (MT[i] & self.bitmask_2) + (MT[(i + 1) % 624] & self.bitmask_3)
+            MT[i] = MT[(i + 397) % 624] ^ (y >> 1)
+            if y % 2 != 0:
+                MT[i] ^= 2567483615
+        return MT   
+    
+
+    def __extract_number(self, MT, index):
+        """
+        Extract a tempered pseudorandom number based on the index-th value,
+        calling generate_numbers() every 624 numbers
+        """
+        if index == 0:
+            MT = self.__generate_numbers(MT)
+        y = MT[index]
+        y ^= y >> 11
+        y ^= (y << 7) & 2636928640
+        y ^= (y << 15) & 4022730752
+        y ^= y >> 18    
+
+        index = (index + 1) % 624
+        return (MT, index, y)
+
+class translator(object):
+    """Tranlator for multiple language support"""
+
+    supported_langs = ['en', 'de', 'sp', 'zh_cn']
+
+    def __init__(self, target_lang = 'en'):
+        self.main_lang = 0
+        self.target_lang = self.supported_langs.index(target_lang)
+
+        self.main_lang_list = \
+            [line.rstrip() for line in open('lang_' + self.supported_langs[self.main_lang].upper() + '.ini', encoding="utf-8")]
+
+        self.target_lang_list = \
+            [line.rstrip() for line in open('lang_' + self.supported_langs[self.target_lang].upper().upper() + '.ini', encoding="utf-8")]
+        print(self.main_lang_list.index('You won!'))
+
+    def translate(self, sentence):
+        m_sentence = sentence.rstrip()
+        ending_spaces = len(sentence) - len(m_sentence)
+
+        try:
+            sent_index = self.main_lang_list.index(m_sentence)
+            return self.target_lang_list[sent_index] + ' ' * ending_spaces
+        except:
+            return sentence
+
+def _(original_string):
+    if not 'trans' in globals():
+        raise Exception('Undefined translator')
+
+    return trans.translate(original_string)
 
 def display(player, dealer, args):
     '''Display the current information available to the player.'''
     print(_('The dealer is showing: '), dealer[0])
     print(_('Your hand is: '), player) 
+
 
 def hit_me(args):
     '''Query the user as to whether they want another car or not.
@@ -137,17 +250,13 @@ def hit_me(args):
         ans = input(_('Would you like another card? (y/n):'))
     return ans.lower() == 'y'
 
+
 def game(args):
-    trans_init(args)
+    if not args.language in translator.supported_langs:
+        raise ValueError("Language not recognized or implemented.")
 
-    from datetime import datetime
-    # randU initiation
-    x = int((datetime.utcnow() - datetime.min).total_seconds())
-    # Constants given by the RANDU algorithm:
-    # https://en.wikipedia.org/wiki/RANDU
-    c = 65539
-    m = 2147483648
-
+    global trans
+    trans = translator(target_lang = args.language)
 
     # Initialize everything
 
@@ -159,15 +268,15 @@ def game(args):
 
     # Deal the initial cards
     for a in range(2):
-        card = deck.pop_rand(rand_method = args.rand_method, x = x, c = c, m = m)
+        card = deck.pop_rand(rand_method = args.rand_method)
         my_hand.append(card)
-        card = deck.pop_rand(rand_method = args.rand_method, x = x, c = c, m = m)
+        card = deck.pop_rand(rand_method = args.rand_method)
         dealer_hand.append(card)
 
     # Give the user as many cards as they want (without going bust).
     display(my_hand, dealer_hand, args)
     while hit_me(args):
-        card = deck.pop_rand(rand_method = args.rand_method, x = x, c = c, m = m)
+        card = deck.pop_rand(rand_method = args.rand_method)
         my_hand.append(card)
         display(my_hand, dealer_hand, args)
         if my_hand.blackjack_value() < 0:
@@ -177,7 +286,7 @@ def game(args):
     # Now deal cards to the dealer:
     print(_("The dealer has: "), repr(dealer_hand))
     while 0 < dealer_hand.blackjack_value() < 17:
-        card = deck.pop_rand(rand_method = args.rand_method, x = x, c = c, m = m)
+        card = deck.pop_rand(rand_method = args.rand_method)
         dealer_hand.append(card)
         print(_('The dealer hits'))
         print(_('The dealer has: '), repr(dealer_hand))
@@ -203,7 +312,6 @@ if __name__ == '__main__':
     import argparse 
 
     parser = argparse.ArgumentParser(description="BlackJack Game")
-    # Note that the rand_method argument is nor enabled in code!
     parser.add_argument('--rand_method', default='randU', 
                         help='The random number generator method. Choose between \'Mersenne\' and \'randU\'.')
     parser.add_argument('--language', default='en',
