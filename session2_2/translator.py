@@ -15,6 +15,9 @@ class translator(object):
         print(self.main_lang_list.index('You won!'))
 
     def translate(self, sentence):
+        if self.target_lang == self.main_lang:
+            return sentence
+
         m_sentence = sentence.rstrip()
         ending_spaces = len(sentence) - len(m_sentence)
 
@@ -23,7 +26,7 @@ class translator(object):
             return self.target_lang_list[sent_index] + ' ' * ending_spaces
         except:
             return sentence
-            
+
 def trans_init(args):
     if not args.language in translator.supported_langs:
         raise ValueError("Language not recognized or implemented.")
@@ -32,6 +35,19 @@ def trans_init(args):
     trans = translator(target_lang = args.language)
 
 def _(original_string):
+    '''Return the value of a card when in the game of Blackjack.    
+
+    Input:
+        original_string: A string with sentence.
+
+    Returns:
+        string, the translated version of the string
+
+    Strictly speaking, Aces can be valued at either 1 or 10, this
+    implementation assumes that the value is always 1, and then determines
+    later how many aces can be valued at 10.  (This occurs in
+    blackjack_value.)
+    '''
     if not 'trans' in globals():
         raise Exception('Undefined translator')
 

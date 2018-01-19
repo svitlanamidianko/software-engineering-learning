@@ -3,6 +3,9 @@ from translator import translator, trans_init, _
 
 class Card(object):
 
+    # Constant for suits and ranks
+    # Ref: Applied output structure from https://github.com/worldveil/deuces/
+
     PRETTY_SUITS = {
         'h' : u'\u2660', # spades
         'd' : u'\u2764', # hearts
@@ -27,10 +30,14 @@ class Card(object):
 
         Input:
             card: A string which identifies the playing card.
+
+        Returns:
+            int, indicating the value of the card in blackjack rule.
+
         Strictly speaking, Aces can be valued at either 1 or 10, this
         implementation assumes that the value is always 1, and then determines
         later how many aces can be valued at 10.  (This occurs in
-        blackjack_hand_value.)
+        blackjack_value.)
         '''
         return (self.rank < 10) * self.rank + (self.rank >= 10) * 10
 
@@ -46,7 +53,6 @@ class Card(object):
         return self.rank == 1
 
 class CardDeck(object):
-    # Ref: https://github.com/worldveil/deuces/
 
     def __init__(self, status = 'empty'):
         if status == 'empty':
@@ -57,9 +63,11 @@ class CardDeck(object):
             raise Exception('Unknown deck status')
 
     def __repr__(self):
+        # For output
         return str([Card.PRETTY_SUITS[__.suit] + ' ' + Card.STR_RANKS[__.rank - 1] for __ in self.cards])
 
     def __getitem__(self, key):
+        # For indexing
         return self.cards[key]
 
     def shuffle(self):
@@ -77,6 +85,8 @@ class CardDeck(object):
         else:
             return cards.pop(position)
 
+    # Modify the code here for abstraction.
+    # ------------------------------------------------------
     def pop_rand(self, rand_method, x, c, m):
         ''' This element returns a random card from a given list of cards.  
 
@@ -86,11 +96,10 @@ class CardDeck(object):
           x2: variable for use in the generation of random numbers.
         ''' 
 
-        # Modify the code here for abstraction!
-
         rand_num = random_number(x, c, m)
 
         return self.cards.pop(rand_num % len(self.cards))
+    # ------------------------------------------------------
 
     def blackjack_value(self):
         '''Calculate the maximal value of a given hand in Blackjack.    
@@ -113,12 +122,16 @@ class CardDeck(object):
         else:
             return final_value
 
+# Modify the code here for abstraction.
+# ------------------------------------------------------
 def random_number(x, c, m):
     ''' Produce a random number using the Park-Miller method.
     See http://www.firstpr.com.au/dsp/rand31/ for further details of this
     method. It is recommended to use the returned value as the value for x1,
     when next calling the method.'''
+
     return abs((c * x) % m)
+# ------------------------------------------------------
 
 def display(player, dealer, args):
     '''Display the current information available to the player.'''

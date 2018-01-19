@@ -3,12 +3,12 @@
 ### 1. Get started
 To set up a suitable environment for this session's code:
 ```bash
-$ python3 -m venv venv
-$ source venv/bin/activate
-$ pip install -r requirements.txt
-$ python blackjack.py
+$ PYTHONENCODING=utf-8 python3 blackjack.py
 ```
 And you should be able to play a simplified form of blackjack.
+
+### The following Readme file needs to be edited; 
+>> Pass
 
 ### 2. Read `blackjack.py`
 (and identify why it is poorly-designed)
