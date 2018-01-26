@@ -1,10 +1,16 @@
 import itertools
-from translator import translator, trans_init, _
+
+import gettext
+
+gettext.bindtextdomain('blackjack', 'locale/')
+gettext.textdomain('blackjack')
+_ = gettext.gettext
 
 class Card(object):
+    # Author: Qifan Yang (https://github.com/QifanYang-bw)
+    # Ref: Applied output structure from https://github.com/worldveil/deuces/
 
     # Constant for suits and ranks
-    # Ref: Applied output structure from https://github.com/worldveil/deuces/
 
     PRETTY_SUITS = {
         'h' : u'\u2660', # spades
@@ -53,6 +59,9 @@ class Card(object):
         return self.rank == 1
 
 class CardDeck(object):
+    # Author: Qifan Yang
+
+    # Constant for suits and ranks
 
     def __init__(self, status = 'empty'):
         if status == 'empty':
@@ -151,8 +160,9 @@ def hit_me(args):
     return ans.lower() == 'y'
 
 def game(args):
-    trans_init(args)
 
+    # Modify the code here for abstraction.
+    # ------------------------------------------------------
     from datetime import datetime
     # randU initiation
     x = int((datetime.utcnow() - datetime.min).total_seconds())
@@ -160,6 +170,7 @@ def game(args):
     # https://en.wikipedia.org/wiki/RANDU
     c = 65539
     m = 2147483648
+    # ------------------------------------------------------
 
 
     # Initialize everything
@@ -198,7 +209,7 @@ def game(args):
     if dealer_hand.blackjack_value() < 0:
         print(_("The dealer has gone bust!"))
     else:
-        print('The dealer sticks with: ', repr(dealer_hand))
+        print(_('The dealer sticks with: '), repr(dealer_hand))
 
     # Determine who has won the game:
     my_total = my_hand.blackjack_value()
@@ -219,8 +230,6 @@ if __name__ == '__main__':
     # Note that the rand_method argument is nor enabled in code!
     parser.add_argument('--rand_method', default='randU', 
                         help='The random number generator method. Choose between \'Mersenne\' and \'randU\'.')
-    parser.add_argument('--language', default='en',
-                        help='The language to play blackjack, e.g. "en"')
     args = parser.parse_args()
 
     print()
