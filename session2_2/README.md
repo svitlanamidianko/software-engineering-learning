@@ -43,6 +43,9 @@ elif LANGUAGE == 'es':
     print('¡Te has vuelto loco!')
 ```
 
+External Web resources:
+The Invent with Python Blog (2014). Retrieved from https://inventwithpython.com/blog/2014/12/20/translate-your-python-3-program-with-the-gettext-module/
+
 Complete the following steps to add support for your language:
 1. Locate the position for pygettext.py and msgfmt.py. For Mac, they are located in your Python3 folder, in examples/Tools/i18n/; For Windows, they are in \Tools\i18n.
 
