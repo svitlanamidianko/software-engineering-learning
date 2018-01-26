@@ -50,17 +50,21 @@ Complete the following steps to add support for your language:
 $ python3 pygettext.py -o gettext.pot blackjack.py
 ```
 (Assuming pygettext.py is in the same folder)
+
 3. Open gettext.pot. Translate each sentence after msgid and fill the empty string after mgsstr. If you don't know the language well, use google translate to help you.
+
 4. Run:
 ```bash
 $ python3 msgfmt.py -o blackjack.mo gettext.pot
 ```
 (Assuming msgfmt.py is in the same folder)
+
 5. Move blackjack.mo into /locale/Your_Language_Code/LC_MESSAGE/. Run:
 ```bash
 $ LANG=Your_Language_Code PYTHONENCODING=utf-8 python3 blackjack.py
 ```
 Replace Your_Language_Code above with your language code.
+
 6. Enjoy!
 
 Think about the following question:
