@@ -43,7 +43,7 @@ elif LANGUAGE == 'es':
     print('¡Te has vuelto loco!')
 ```
 
-Complete the following steps to create support for your language:
+Complete the following steps to add support for your language:
 1. Locate the position for pygettext.py and msgfmt.py. For Mac, they are located in your Python3 folder, in examples/Tools/i18n/; For Windows, they are in \Tools\i18n.
 2. Run:
 ```bash
