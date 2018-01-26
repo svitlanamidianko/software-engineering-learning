@@ -1,4 +1,10 @@
-import itertools
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Originally written by Philip Sterne <psterne@minervaproject.com>
+#
+# Jan 16, 2018 Qifan Yang <qifan@minerva.kgi.edu>
+# Added implementation for class Card and Carddeck;
+# Added multilingual support to reduce workload
 
 import gettext
 
@@ -7,8 +13,7 @@ gettext.textdomain('blackjack')
 _ = gettext.gettext
 
 class Card(object):
-    # Author: Qifan Yang (https://github.com/QifanYang-bw)
-    # Ref: Applied output structure from https://github.com/worldveil/deuces/
+    # Ref: Applied PRETTY_SUITS and STR_RANKS structure from https://github.com/worldveil/deuces/
 
     # Constant for suits and ranks
 
@@ -59,8 +64,6 @@ class Card(object):
         return self.rank == 1
 
 class CardDeck(object):
-    # Author: Qifan Yang
-
     # Constant for suits and ranks
 
     def __init__(self, status = 'empty'):
