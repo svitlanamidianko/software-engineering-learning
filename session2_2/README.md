@@ -11,7 +11,7 @@ And you should be able to play a simplified form of blackjack.
 
 The exercise for today's seminar is to refactor this program into a well-designed, object-oriented program. Labeling a program as object-oriented does not make it inherently good, and what follows is a short justification of why we should care about good design and object-orientation.
 
-For this course, we will define a program to be well designed iff:
+For this course, we will define a program to be well designed if:
 >There are many potential features that could be added to the program, and each feature only requires a small number of locations to edited.
 
 This is arguably *the* key aspect of good design.  It is the only requirement that allows a project to grow in scale and complexity.  If you have a project of millions of lines of code (e.g. the linux kernel, a modern web-browser) then good design is essential.  Consider a large project that is badly designed (ie. adding a single feature usually affects the entire codebase) then progress will necessarily be very slow.  Not only will an engineer need to understand millions of lines of code, but they will also need to synchronously make changes in many locations (to avoid introducing bugs).  This bad project also has the side effect that whenever one new feature is rolled out by another team then it will most likely affect the progress of all other teams ("stepping on each other's toes").
