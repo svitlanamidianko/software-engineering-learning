@@ -47,16 +47,19 @@ Complete the following steps to create support for your language:
 1. Locate the position for pygettext.py and msgfmt.py. For Mac, they are located in your Python3 folder, in examples/Tools/i18n/; For Windows, they are in \Tools\i18n.
 2. Run:
 ```bash
-$ python3 pygettext.py -o gettext.pot blackjack.py```
+$ python3 pygettext.py -o gettext.pot blackjack.py
+```
 (Assuming pygettext.py is in the same folder)
 3. Open gettext.pot. Translate each sentence after msgid and fill the empty string after mgsstr. If you don't know the language well, use google translate to help you.
 4. Run:
 ```bash
-$ python3 msgfmt.py -o blackjack.mo gettext.pot```
+$ python3 msgfmt.py -o blackjack.mo gettext.pot
+```
 (Assuming msgfmt.py is in the same folder)
 5. Move blackjack.mo into /locale/Your_Language_Code/LC_MESSAGE/. Run:
 ```bash
-$ LANG=Your_Language_Code PYTHONENCODING=utf-8 python3 blackjack.py```
+$ LANG=Your_Language_Code PYTHONENCODING=utf-8 python3 blackjack.py
+```
 Replace Your_Language_Code above with your language code.
 6. Enjoy!
 
