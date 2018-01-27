@@ -9,10 +9,6 @@
 import itertools
 import gettext
 
-gettext.bindtextdomain('blackjack', 'locale/')
-gettext.textdomain('blackjack')
-_ = gettext.gettext
-
 class Card(object):
     # Ref: Applied PRETTY_SUITS and STR_RANKS structure from https://github.com/worldveil/deuces/
 
@@ -235,6 +231,10 @@ if __name__ == '__main__':
     parser.add_argument('--rand_method', default='randU', 
                         help='The random number generator method. Choose between \'Mersenne\' and \'randU\'.')
     args = parser.parse_args()
+
+    gettext.bindtextdomain('blackjack', 'locale/')
+    gettext.textdomain('blackjack')
+    _ = gettext.gettext
 
     print()
     print('BlackJack') 
