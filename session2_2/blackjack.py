@@ -10,7 +10,9 @@ import itertools
 import gettext
 
 class Card(object):
-    # Ref: Applied PRETTY_SUITS and STR_RANKS structure from https://github.com/worldveil/deuces/
+
+    # Ref: Applied PRETTY_SUITS and STR_RANKS structure
+    # from https://github.com/worldveil/deuces/
 
     # Constant for suits and ranks
 
@@ -160,6 +162,7 @@ def hit_me(args):
     return ans.lower() == 'y'
 
 def game(args):
+
 
     # Modify the code here for abstraction.
     # ------------------------------------------------------
