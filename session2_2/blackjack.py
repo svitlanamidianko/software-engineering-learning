@@ -6,6 +6,7 @@
 # Added implementation for class Card and Carddeck;
 # Added multilingual support to reduce workload
 
+import itertools
 import gettext
 
 gettext.bindtextdomain('blackjack', 'locale/')
