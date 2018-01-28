@@ -15,6 +15,7 @@ bitmask_1 = (2**32) - 1  # To get last 32 bits
 bitmask_2 = 2**31  # To get 32nd bit
 bitmask_3 = (2**31) - 1  # To get last 31 bits
 
+import gettext
 
 def initialize_generator(seed):
     "Initialize the generator from a seed"
