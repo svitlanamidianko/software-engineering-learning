@@ -79,10 +79,6 @@ class CardDeck(object):
         # For indexing
         return self.cards[key]
 
-    def shuffle(self):
-        from random import shuffle
-        shuffle(self.cards)
-
     def append(self, card):
         if type(card) != Card:
             raise Exception('Invalid Card')
@@ -177,7 +173,6 @@ def game(args):
     # Initialize everything
 
     deck = CardDeck(status = 'full')
-    deck.shuffle()
 
     my_hand = CardDeck(status = 'empty')
     dealer_hand = CardDeck(status = 'empty')
