@@ -14,6 +14,7 @@ class Card(object):
     # Ref: Applied PRETTY_SUITS and STR_RANKS structure
     # from https://github.com/worldveil/deuces/
 
+    # Constant for suits and ranks
     PRETTY_SUITS = {
         'h' : u'\u2660', # spades
         'd' : u'\u2764', # hearts
@@ -61,7 +62,6 @@ class Card(object):
         return self.rank == 1
 
 class CardDeck(object):
-    # Constant for suits and ranks
 
     def __init__(self, status = 'empty'):
         if status == 'empty':
