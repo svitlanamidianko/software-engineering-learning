@@ -14,8 +14,6 @@ class Card(object):
     # Ref: Applied PRETTY_SUITS and STR_RANKS structure
     # from https://github.com/worldveil/deuces/
 
-    # Constant for suits and ranks
-
     PRETTY_SUITS = {
         'h' : u'\u2660', # spades
         'd' : u'\u2764', # hearts
