@@ -11,7 +11,7 @@ Search the internet and find good definitions and examples of the following:
 - Denormalization
 - Composite key
 
-A simple example is given [here]( https://www.essentialsql.com/get-ready-to-learn-sql-database-normalization-explained-in-simple-english/),
+Simple examples given [here]( https://www.essentialsql.com/get-ready-to-learn-sql-database-normalization-explained-in-simple-english/), and [here](https://www.youtube.com/watch?v=UrYLYV7WSHM)
 but you might find better resources.
 
 ### Road racing association

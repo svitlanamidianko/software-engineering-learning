@@ -15,3 +15,8 @@ if __name__ == '__main__':
     email = input('Please enter your student email address:')
     print('For seminar 3.2:')
     print(problem_choice(email, '3.2', ['2-Logging', '3-Graphics']))
+    print(" ")
+    print('For seminar 9.1:')
+    print(problem_choice(email, '9.1',
+                         ['2. The Current Weather', '3. Crypto Exchange',
+                          '4. Google directions', '5. Flying Aircraft']))
