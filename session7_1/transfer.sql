@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE Balances (
     AccountID INT PRIMARY KEY,
     Name TEXT,

@@ -1,4 +1,5 @@
 .mode column
+PRAGMA foreign_keys = ON; -- activates foreign key features in sqlite. It is disabled by default
 
 CREATE TABLE Clients (
     CLIENTNUMBER INT,
@@ -8,6 +9,7 @@ CREATE TABLE Clients (
     PHONE VARCHAR(20)
 
 );
+
 CREATE TABLE Loans (
     ACCOUNTNUMBER INT, --A unique integer to identify this account
     CLIENTNUMBER INT, -- An integer to identify the client (clients may have more than one account)
@@ -18,7 +20,8 @@ CREATE TABLE Loans (
     PRINCIPALDEBT NUMERIC(11, 2), -- The size of the initial loan
     ACCOUNTLIMIT NUMERIC(11, 2), --
     BALANCE NUMERIC(11, 2), -- How much is currently owed
-    STATUS VARCHAR(11) -- Human readable status - e.g. "PAID OFF", "ARREARS", "NORMAL"
+    STATUS VARCHAR(11), -- Human readable status - e.g. "PAID OFF", "ARREARS", "NORMAL"
+    FOREIGN KEY (CLIENTNUMBER) REFERENCES Clients(CLIENTNUMBER) -- CLIENTNUMBER is the foreign key from Clients table.
 );
 
 INSERT INTO Clients VALUES (1, 'Robert', 'Warren', 'RobertDWarren@teleworm.us', '(251) 546-9442');
