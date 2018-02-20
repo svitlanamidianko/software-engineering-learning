@@ -9,7 +9,7 @@ If you want to compare your results with the final output, have a look here:
 https://github.com/pallets/flask/tree/master/examples/flaskr/
 
 
-###A simple todo application:
+### A simple todo application:
 
 Follow the youtube video at: https://www.youtube.com/watch?v=4kD-GRF5VPs
 
