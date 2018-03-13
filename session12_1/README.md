@@ -65,6 +65,9 @@ how do they interact with each other?  If there is terminology or acronyms that
 you don't understand, search for an explanation on the internet, and bring these
 explanation(s) to class to help your fellow students.
 
+Sketch this out as a picture, in a format suitable for pasting into a group
+document, and bring it to class.
+
 ### Q2. Data persistence
 Does the computation server persist data if it is stopped?  How can you tell?
 
