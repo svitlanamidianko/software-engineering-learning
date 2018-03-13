@@ -86,6 +86,7 @@ particular commands / images).
 
 Now bring the stack up using:
 ```bash
+docker swarm init
 docker stack deploy -c docker-compose.yml cs162-swarm
 ```
 
