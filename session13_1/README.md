@@ -28,7 +28,11 @@ syntax from sqlite.  (For simple queries this shouldn't be a big issue.)
 3. POST an HTTP request with an invalid expression to the server.
 Examine the response and confirm that an error is raised.
 4. Confirm that no more rows have been added to the database since the last
-valid expression was sent to the server.
+valid expression was sent to the server. (For the purposes of this class, you
+can assume that no-one else is accessing the database while the tests are
+running.)
+5. If any of the tests fail, then your program should raise an exception, and
+stop running.  Your program should only complete successfully if all tests pass.
 
 **Store your Python code on Github as either a gist or a repo. When you come to
 class have the URL ready to paste into a poll answer.**
