@@ -24,8 +24,8 @@ are not reintroduced.
 Another useful tool in TDD is the notion of code coverage.  
 
 1. Install coverage with `pip3 install coverage`
-2. Run the coverage tool on [`test.py`](test.py), and generate the html report.
-(This can be done using the commands `coverage run test.py` and `coverage html`)
+2. Run the coverage tool on [`tests.py`](tests.py), and generate the html report.
+(This can be done using the commands `coverage run tests.py` and `coverage html`)
 3. Using the coverage report, write more tests so that you achieve 100% code
 coverage.  Does this find anymore bugs in the library?
 5. Bring your code to class ready to discuss it.  Be sure to remember which
