@@ -33,7 +33,7 @@ docker network create -d bridge cs162-bridge-network
 To start with we can run the instances manually. Run the following commands each in separate Terminal windows, or using the `-d` flag:
 ```bash
 docker run --name=db --network=cs162-bridge-network --expose 5432 -p 5432:5432/tcp -e "POSTGRES_DB=cs162" -e "POSTGRES_USER=cs162_user" -e "POSTGRES_PASSWORD=cs162_password" postgres:alpine
-docker run --name=db-admin --network=cs162-bridge-network --expose 8080 -d -p 8080:8080/tcp adminer
+docker run --name=db-admin --network=cs162-bridge-network --expose 8080 -p 8080:8080/tcp adminer
 docker run --name=cs162-instance --network=cs162-bridge-network --expose 5000 -p 5000:5000/tcp cs162-flask
 ```
 Once all the containers are running successfully then you should confirm that
