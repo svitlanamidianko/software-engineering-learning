@@ -72,7 +72,7 @@ This led to the creation of a tool which can orchestrate the running of many
 docker containers. First we need to tear down all the existing manual
 containers:
 ```bash
-docker rm -f cs162-flask
+docker rm -f cs162-instance
 docker rm -f db-admin
 docker rm -f db
 ```
