@@ -35,26 +35,20 @@ Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-session.add(User(id = 9, name = "What's His Name", insurance_id = 5))
-session.add(Insurance(id = 5, claim_id = 1))
+session.add(User(id = 1, name = "What's His Name", insurance_id = 1))
+session.add(Insurance(id = 1, claim_id = 001))
 session.commit()
 
 print(session.query(User).all())
 
 """You should see something like: 
 
-[<User(id=1, name=What's Her Name, insurance_id=1)>, 
-<User(id=2, name=What's His Name, insurance_id=2)>, 
-<User(id=3, name=Sterne, insurance_id=3)>, 
+<User(id=1, name=What's His Name, insurance_id=1)>
 """
 
-print(session.query(Insurance).filter_by(claim_id = 1).all())
+print(session.query(Insurance).filter_by(claim_id = 001).all())
 
 """
 Here, you should see something like: 
-[<Insurance(id=1, claim_id=1>, 
-<Insurance(id=2, claim_id=2>, 
-<Insurance(id=3, claim_id=3>,
-<Insurance(id=4, claim_id=4>, 
-<Insurance(id=5, claim_id=5>]
+<Insurance(id=1, claim_id=001>
 """
