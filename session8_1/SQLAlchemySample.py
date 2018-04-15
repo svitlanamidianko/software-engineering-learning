@@ -36,7 +36,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 session.add(User(id = 1, name = "What's His Name", insurance_id = 1))
-session.add(Insurance(id = 1, claim_id = 001))
+session.add(Insurance(id = 1, claim_id = 1))
 session.commit()
 
 print(session.query(User).all())
@@ -46,9 +46,9 @@ print(session.query(User).all())
 <User(id=1, name=What's His Name, insurance_id=1)>
 """
 
-print(session.query(Insurance).filter_by(claim_id = 001).all())
+print(session.query(Insurance).filter_by(claim_id = 1).all())
 
 """
 Here, you should see something like: 
-<Insurance(id=1, claim_id=001>
+<Insurance(id=1, claim_id=1>
 """
