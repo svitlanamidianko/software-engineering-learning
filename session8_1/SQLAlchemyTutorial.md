@@ -1,16 +1,20 @@
 # SQLAlchemy Setup Tutorial: A Friendly Intro 
 
-# Local Setup 
+# 1. Local Setup 
 
 First, install SQLAlchemy in terminal with:
 
-`$ pip install sqlalchemy`
+```bash
+$ pip install sqlalchemy
+```
 
-# Setup on a Python Module 
+# 2. Setup on a Python Module 
 
 ## Import SQLALchemy 
 
-`import sqlalchemy` 
+```python 
+import sqlalchemy
+``` 
 
 ## Create Engine 
 
@@ -105,7 +109,9 @@ from sqlalchemy_declarative import Base, User
 
 Create an instance of your User class with: 
 
-`user = User(id = 0, name='sterne', insurance_id='1234')`
+```python
+user = User(id = 1, name='sterne', insurance_id=1234)
+```
 
 And then add it to your DB, by starting a session. 
 
@@ -133,7 +139,7 @@ print(session.query(User).filter_by(name='sterne').first())
 It should print out: 
 
 ```
-<User(id=1, name=Sterne, insurance_id=1)>
+<User(id=1, name=Sterne, insurance_id=1234)>
 ```
  
 Great! 
