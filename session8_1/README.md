@@ -12,7 +12,10 @@ able to satisfy many simultaneous queries coming from many machines.
 
 ## Questions
 
+For the Bank Loans and Online Retailers exercises, please review the SQLAlchemyTutorial.md file in this folder and use the tutorial as a guide to the following exercises. After reading the tutorial, check out the SQLAlchemySample.py file for a working implementation. For comparisons with an SQLite3 implementation in Python, compare SQLAlchemySample.py and SQLite3Sample.py.
+
 ### Bank loans
+
 From the bank loan exercise at the beginning of the unit:
 1. Rewrite all the `CREATE TABLE` commands for the Clients and Loans tables
 to now use SQLAlchemy. The SQLAlchemy commands should also create primary key
