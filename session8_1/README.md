@@ -12,13 +12,13 @@ able to satisfy many simultaneous queries coming from many machines.
 
 ## SQLAlchemy vs. SQLite3 
 
-Why don't we just use SQLite3 in Python (as seen in SQLite3Sample.py)?
+Why don't we just use SQLite3 in Python (as seen in `SQLite3Sample.py`)?
 
 Using an ORM like SQLAlchemy allows code to be deployed across multiple database engines. Using a native relational database language like SQLite (not an abstraction layer like SQLAlchemy) works for local machines where file-based databases still work, but in cases where the same database may need to be accessed simultaneously from many computers over a network, this presents issues with latency and file corruption if the same part of the underlying database is modified at the same time. 
 
 The other convenient thing about SQLAlchemy is that the underlying database it's connected to -- whether SQLite3 or MySQL or Postgres -- can be changed quite painlessly, as opposed to rewriting each command (the engine interface that SQLAlchemy is connected to will just need to change). 
 
-For comparisons with an SQLite3 implementation in Python, compare SQLAlchemySample.py and SQLite3Sample.py. Check out this [link](http://www.sqlite.org/whentouse.html) to read more about when SQLite works well and when it doesn't.
+For comparisons with an SQLite3 implementation in Python, compare `SQLAlchemySample.py` and `SQLite3Sample.py`. Check out this [link](http://www.sqlite.org/whentouse.html) to read more about when SQLite works well and when it doesn't.
 
 ## SQLAlchemy Tutorial 
 
@@ -47,13 +47,13 @@ from sqlalchemy import create_engine
 engine = create_engine('sqlite:///:memory:', echo = TRUE)
 ```
  
-What's happening with the create_engine() function?
+What's happening with the `create_engine()` function?
 
 The engine connects to the database, and this function specifies which database it should connect to.
 
-What is 'sqlite:///'? Firstly, this initialises an SQLite Database, which allows us to use SQLite syntax the way we have learnt in prior classes.
+What is `sqlite:///`? Firstly, this initialises an SQLite Database, which allows us to use SQLite syntax the way we have learnt in prior classes.
 
-:memory: simply implies that the SQLite database will not persist beyond individual sessions.
+`:memory:` simply implies that the SQLite database will not persist beyond individual sessions.
 The database will only persist as long as the application instance is running. 
 
 If we do: 
@@ -62,11 +62,11 @@ If we do:
 engine = create_engine('sqlite:///try_database.db') 
 ```
 
-Then this creates a local .db file named 'try_database.db' (if it doesn't exist already on your path). We will learn how to use SQLAlchemy to open up the .db file and see if there are any new entries. This database.db file will persist locally.
+Then this creates a local .db file named `try_database.db` (if it doesn't exist already on your path). We will learn how to use SQLAlchemy to open up the .db file and see if there are any new entries. This `database.db` file will persist locally.
 
 #### Connect to engine 
 
-Now, connect to the engine interface that you created using the default connect() function. 
+Now, connect to the engine interface that you created using the default `connect()` function. 
 
 ```python
 engine.connect() 
@@ -81,11 +81,11 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base() 
 ```
 
-After declaring a base, we will be able to define classes relative to the base. So each class should be created as class 'tablename'(Base).
+After declaring a base, we will be able to define classes relative to the base. So each class should be created as class `'tablename'(Base)`.
 
 #### Create a Table Mapping
 
-Let's initialise a simple table 'Users' by initialising a User class and writing a __repr__() method to represent the schema. 
+Let's initialise a simple table `Users` by initialising a User class and writing a `__repr__()`method to represent the schema. 
 
 ```python
 from sqlalchemy import Column, Integer, String, ForeignKey 
@@ -117,9 +117,11 @@ After defining the schema of the table, we will need to actually create it in ou
 
 We have to call: 
 
-`Base.metadata.create_all(engine)`
+```python
+Base.metadata.create_all(engine)
+```
 
-This is very important, as without calling create_all(engine) and binding it to the engine, the schema will not be initialised. Your table should now be created, and you will be able to add elements to it. 
+This is very important, as without calling `create_all(engine)` and binding it to the engine, the schema will not be initialised. Your table should now be created, and you will be able to add elements to it. 
 
 ## Adding Elements to the SQLAlchemy 
 
@@ -131,7 +133,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy_declarative import Base, User
 ```
 
-Create an instance of your User class with: 
+Create an instance of your `User` class with: 
 
 ```python
 user = User(id = 1, name='sterne', insurance_id=1234)
@@ -148,13 +150,11 @@ session.add(user)
 session.commit()
 ```
 
-'user' should now be in your database! 
+`user` should now be in your database! 
 
 ## Querying your Table
 
-See the SQLALchemyQuery.py file for a working implementation of a basic SQLAlchemy query.
-
-Let's check if 'user' is in the database.
+Let's check if `user` is in the database.
 
 ```python
 print(session.query(User).filter_by(name='sterne').first())
@@ -163,7 +163,7 @@ print(session.query(User).filter_by(name='sterne').first())
 It should print out: 
 
 ```
-<User(id=1, name=Sterne, insurance_id=1234)>
+<User(id=1, name=sterne, insurance_id=1234)>
 ```
  
 Great! 
@@ -176,26 +176,28 @@ Reflecting a table simply means being able to read its metadata, and being able 
 from sqlalchemy import Table
 ```
 
-'Table' is the name of the table you are referencing. Make sure that you are connected to the same engine that has the table you are aiming to reflect.
+`Table` is the name of the table you are referencing. Make sure that you are connected to the same engine that has the table you are aiming to reflect.
 
 ### Reflect table from the engine: Table
 
 `users = Table('users', metadata, autoload=True, autoload_with=engine)`
 
-Load the table 'users' that you initialised before with the above function.
+Load the table `users` that you initialised before with the above function.
 
-The autoload_with = engine parameter ensures that it's connecting to the right engine interface.
+The `autoload_with=engine` parameter ensures that it's connecting to the right engine interface.
 
 ### Print table metadata
 
-The __repr__() method that you defined in your User(Base) class will return a string detailing the details of your database in the format you chose.
+The `__repr__()` method that you defined in your `User(Base)` class will return a string detailing the details of your database in the format you chose.
 
-`print(repr(users))` 
+```
+print(repr(users))
+```
 
 
 ## Questions
 
-Use the tutorial above as a guide to the following exercises. After reading the tutorial, check out the SQLAlchemySample.py file for a working implementation. 
+Use the tutorial above as a guide to the following exercises. After reading the tutorial, check out the `SQLAlchemySample.py` file for a working implementation. 
 
 ### Bank loans
 
