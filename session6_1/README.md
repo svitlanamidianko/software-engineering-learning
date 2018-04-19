@@ -30,6 +30,21 @@ Use ".open FILENAME" to reopen on a persistent database.
 sqlite> .read create.sql
 ```
 
+## Foreign Keys in SQLite Database
+Foreign keys are created to enforce relationship between two tables. Generally, a foreign key in child table would be a column that is the primary key of primary table. The syntax to create the foreign key is
+```
+FOREIGN KEY (<Name of Variable>) REFERENCES <Parent Table>(<Name of foreign key>)
+```
+In `banksloans.sql`, we have created a foreign key relationship between **Clients** and **Loans** table. Each loan will be assigned to a specific client. **Clients** table is linked with **Loans** table using `CLIENTNUMBER` as the foreign key in **Loans** table shown by statement `FOREIGN KEY (CLIENTNUMBER) REFERENCES Clients(CLIENTNUMBER)` inside the `Loans` Table.
+Because of this foreign key constraints, there will have to one record in Clients table for every record in loans table. The database will only allow user to add a record in Loans table whose CLIENTNUMBER exists in Clients table. Deleting a client record from Clients table will also delete the records from Loans table that have the same CLIENTNUMBER.
+
+Foreign keys in Sqlite database are disabled by default for backward compatibility so, the foreign key constraints should be enforced at the beginning of SQL script or every time running the script.
+The foreign key constraints can be added by following command:
+```
+PRAGMA foreign_keys = ON;
+```  
+
+
 Remember to comment your SQL commands!  Single line comments use a double
 hyphen (`--`), while multi-line comments use `/* ... */`.
 
