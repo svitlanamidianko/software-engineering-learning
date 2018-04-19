@@ -87,7 +87,16 @@ explain how and why your attack will work.
 
 You must be able to paste any part of your code into a poll response.
 
-### 1. Write an SQL injection
+### 1. Try an SQL Injection Hack 
+
+It's time to give SQL Injection a shot using the `'' OR ''=''` SQL trick (which always returns True). Here's a hack to try at https://sqlzoo.net/hack/ to see if you can successfully gain access to a user's account.
+
+1. Log in to the forum as "Jake" by passing "xxx" into the username and an SQL injection into the password. 
+2. (Optional) Acquire a user's password and then log into the main forum. Post something there as the user. 
+
+Walk through each of the tutorials to try to gain access to a user's account, then post something on the forum if you are able to! 
+
+### 2. Write an SQL injection
 Assume the following tables exist:
 ```sqlite3
 CREATE TABLE users (
@@ -129,11 +138,6 @@ loners and never had any friends!)
 SQL injection attack which will list all the tables.  Now write an attack which
 will list all columns within a given table.
 
-### 2. Try an SQL Injection Hack 
-
-It's time to give SQL Injection a shot using the '' OR ''='' SQL trick. Here's a hack to try at https://sqlzoo.net/hack/ to see if you can successfully gain access to a user's account.
-
-Walk through each of the tutorials to try to gain access to a user's account, then post something on the forum if you are able to! 
 
 ### 3. Multiple User Kanban
 
