@@ -1,6 +1,8 @@
-"""Before you read this working implementation, 
+"""
+Before you read this working implementation, 
 please review the SQLAlchemyTutorial to walk through the steps of 
-initialising a simple SQLAlchemy ORM on Python"""
+initialising a simple SQLAlchemy ORM on Python
+"""
 
 import sqlalchemy 
 from sqlalchemy import create_engine, Column, Text, Integer, ForeignKey
