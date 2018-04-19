@@ -43,7 +43,7 @@ The foreign key constraints can be added by following command:
 ```
 PRAGMA foreign_keys = ON;
 ```  
-
+Further information is available at [https://sqlite.org/foreignkeys.html](https://sqlite.org/foreignkeys.html)
 
 Remember to comment your SQL commands!  Single line comments use a double
 hyphen (`--`), while multi-line comments use `/* ... */`.
