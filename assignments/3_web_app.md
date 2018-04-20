@@ -5,6 +5,7 @@ be in one of three states:
 1. To do
 2. Doing
 3. Done
+
 Your assignment is to write a flask application which provides the functionality
 associated with a personal kanban board. This includes:
 1. Registering a new user
@@ -13,6 +14,7 @@ associated with a personal kanban board. This includes:
 4. Moving tasks to different states
 5. Deleting tasks
 6. Logging out
+
 Please find a few example kanban board websites and use them so that you have a
 clear idea of what is needed. (Note that the professional versions look much
 nicer and have many more bells and whistles than are asked for in this
