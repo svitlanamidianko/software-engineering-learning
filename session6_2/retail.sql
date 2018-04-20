@@ -1,5 +1,6 @@
 .mode column
 .headers on
+PRAGMA foreign_keys = ON;
 
 CREATE TABLE Product (
     ProductID INT,
@@ -17,7 +18,9 @@ CREATE TABLE Orders (
 CREATE TABLE OrderItems (
     OrderID INT,
     ProductID INT,
-    Quantity INT
+    Quantity INT,
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 );
 
 

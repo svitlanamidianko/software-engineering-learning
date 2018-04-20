@@ -1,5 +1,6 @@
 .mode column
 .headers on
+PRAGMA foreign_keys = ON;
 
 CREATE TABLE Product (
     ProductID INT PRIMARY KEY,
@@ -8,17 +9,23 @@ CREATE TABLE Product (
     Price NUMERIC(11, 2),
     Cost NUMERIC(11, 2)
 );
+
 CREATE TABLE Orders (
     OrderID INT PRIMARY KEY,
     CustomerID INT,
     DateOrdered DATETIME,
-    MonthOrdered INT
+    MonthOrdered INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 );
+
 CREATE TABLE OrderItems (
     OrderID INT,
     ProductID INT,
-    Quantity INT
+    Quantity INT,
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 );
+
 CREATE TABLE Warehouse (
     WarehouseID INT PRIMARY KEY,
     Name TEXT,
@@ -26,11 +33,15 @@ CREATE TABLE Warehouse (
     AddressLine2 TEXT,
     AddressLine3 TEXT
 );
+
 CREATE TABLE Inventory (
     WarehouseID INT,
     ProductID INT,
-    Quantity INT
+    Quantity INT,
+    FOREIGN KEY (WarehouseID) REFERENCES Warehouse(WarehouseID),
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 );
+
 CREATE TABLE Supplier (
     SupplierID INT,
     Name TeXT,
@@ -44,8 +55,11 @@ CREATE TABLE SupplierProduct(
     SupplierID INT,
     ProductID INT,
     DaysLeadTime INT,
-    Cost NUMERIC(11, 2)
+    Cost NUMERIC(11, 2),
+    FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID),
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 );
+
 CREATE TABLE SupplierOrders(
     SupplierOrderID INT,
     SupplierID INT,
@@ -54,7 +68,10 @@ CREATE TABLE SupplierOrders(
     Quantity INT,
     Status TEXT,
     DateOrdered DATE,
-    DateDue DATE
+    DateDue DATE,
+    FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID),
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
+    FOREIGN KEY (WarehouseID) REFERENCES Warehouse(WarehouseID),
 );
 CREATE TABLE Customer (
     CustomerID INT,
