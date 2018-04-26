@@ -160,15 +160,8 @@ print(t)
 ```
 
 ## Questions:
-### 1. Multiple inheritance bug
-There is a subtle bug in the initialization of a tomato.  Identify the bug,
-and then fix the bug!
 
-### 2. Bug or feature?
-Notice that a tomato can now also appear inside a fruit salad without any
-errors.  Is this a bug or a feature?  Make arguments for both sides.
-
-### 3. Identity Access Management - IAM
+### 1. Identity Access Management - IAM
 It is crucial to get the access control correctly implemented.  As an example,
 consider logging onto ALF.  In this case there are students and professors, each
 of whom is part of multiple courses.  In each course one might have different
@@ -189,7 +182,12 @@ action, such as sending the class to breakout.
 implemented in ALF.  As an alternative exercise, try to design how IAM is handled
 in ALF.)
 
-### 4. Liskov Substitution principle
+### 2. Bug or feature?
+Notice that a tomato can now also appear inside a fruit salad without any
+errors.  Is this a bug or a feature?  Make arguments for both sides.
+
+
+### 3. Liskov Substitution principle
  At the REPL, typing `type(x)` will show what type of variable `x` is, while `dir(x)` will reveal all the methods that x has.
 
  Work through the simple types (e.g. list, int, float, string) and find out whether it is possible to call the following code with an instance of that type.  Is it possible to find an instance that works, while another instance (of the same type) fails?  
@@ -203,3 +201,7 @@ def liskov_substitution_principle(x):
  Is this a violation of the Liskov substitution principle? Why or why not?
 
  [Helpful reading](https://docs.python.org/3.5/library/operator.html)
+
+### 5. (Optional) Multiple inheritance bug
+There is a subtle bug in the initialization of a tomato.  Identify the bug,
+and then fix the bug!

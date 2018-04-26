@@ -1,5 +1,8 @@
 ## SQL indices
 
+A SQL index allows us to keep track of the rows in a table sorted by a particular
+column.  In nearly all cases this dramatically speeds up SQL queries!
+
 ### Finding a row
 
 ```sqlite3
@@ -37,7 +40,7 @@ do work roughly proportional to *O(MN)*.
 ## Questions
 
 ### Large un-indexed tables
-In random.sql there is a slow query which joins three un-indexed tables
+In `random.sql` there is a slow query which joins three un-indexed tables
 together.  Since this is a nested for loop and the tables are roughly the
 same size then it will take *O(N^3)* time.
 

@@ -24,7 +24,7 @@ def is_prime(x):
 
 
 def get_next_prime(x):
-    ''' Find the smallest prime number which is smaller than or equal to x.'''
+    ''' Find the smallest prime number which is greater than or equal to x.'''
 
     if x % 2 == 0:
         x = x + 1

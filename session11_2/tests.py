@@ -6,7 +6,7 @@ class PrimeTests(unittest.TestCase):
     """Tests for `prime.py`."""
 
     def test_is_seven_prime(self):
-        """Is five prime according to the lib?"""
+        """Is seven prime according to the lib?"""
         self.assertTrue(prime.is_prime(7))
 
     def test_bigger_prime_of_twelve(self):

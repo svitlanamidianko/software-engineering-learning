@@ -12,9 +12,9 @@ As the author of a popular library called [`prime.py`](prime.py) you
 occasionally receive bug reports from users who are using your library in their
 application. The latest bug report was filed by someone using [`application.py`](application.py).
 
-1. Run their code and reproduce the error (it should be a math domain error).
+1. Run `application.py` and reproduce the error (it should be a math domain error).
 2. Examine their code and find the bug.  
-3. Now fix your library such that the  application code works correctly (and
+3. Now fix your library such that the application code works correctly (and
     without any other errors).
 4. Write one (or more) unit tests to ensure that the bugs that you have fixed
 are not reintroduced.
@@ -24,7 +24,8 @@ are not reintroduced.
 Another useful tool in TDD is the notion of code coverage.  
 
 1. Install coverage with `pip3 install coverage`
-2. Run the coverage tool on [`test.py`](test.py), and generate the html report.
+2. Run the coverage tool on [`tests.py`](tests.py), and generate the html report.
+(This can be done using the commands `coverage run tests.py` and `coverage html`)
 3. Using the coverage report, write more tests so that you achieve 100% code
 coverage.  Does this find anymore bugs in the library?
 5. Bring your code to class ready to discuss it.  Be sure to remember which

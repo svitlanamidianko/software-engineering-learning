@@ -3,7 +3,6 @@ Data normalization refers to the degree to which potentially-shared
 information is moved into separate tables.
 
 ## Questions
-
 ### Definitions of normalization
 Search the internet and find good definitions and examples of the following:
 - First normal form
@@ -11,6 +10,9 @@ Search the internet and find good definitions and examples of the following:
 - Third normal form
 - Denormalization
 - Composite key
+
+Simple examples given [here]( https://www.essentialsql.com/get-ready-to-learn-sql-database-normalization-explained-in-simple-english/), and [here](https://www.youtube.com/watch?v=UrYLYV7WSHM)
+but you might find better resources.
 
 ### Road racing association
 ##### Description
@@ -50,17 +52,6 @@ emailed or posted out.
 4. Write a SQL query to find the top 3 fastest women runners for a given race.
 5. Write a SQL query to find all the runners' email addresses that
 successfully finished the marathon challenge.
-
-##### Alternate Design
-Make a copy of your original design and make the following changes
-1. Introduce a change in your schema that violates third normal form. Be able to
-explain what third normal form is and why your change violates it.
-2. Introduce another change, but this time violate second normal form.
-Be able to  explain what second normal form is and why your change violates it.
-3. Carry out another change, but this time violate the first normal form.
-Be able to explain what first normal form is and why your change violates it.
-4. Change your database schema, by denormalizing two tables that will be
-frequently joined.  Will it ever make sense to denormalize your data, and why?
 
 **Bring your design and your alternate design(s) to class and be prepared to
 explain them**
