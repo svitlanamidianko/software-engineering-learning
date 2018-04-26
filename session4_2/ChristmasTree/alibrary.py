@@ -1,11 +1,9 @@
 import random
 try:
     from log import FileLog
+    logFile = FileLog()
 except Exception as e:
-    print('Warning: Missing Filelog in log.py')
-
-
-logFile = FileLog()
+    print('WARNING: Missing Filelog() in log.py')
 
 def giftGenerate(count = 1):
     """ Gift Generation.
@@ -25,7 +23,10 @@ def giftGenerate(count = 1):
     for _ in range(count):
         ans.append(random.choice(glist))
 
-    logFile.info('Generated ' + str(count) + ' gifts from giftGenerate().')
+    try:
+        logFile.info('Generated ' + str(count) + ' gifts from giftGenerate().')
+    except:
+        pass
     return ans
 
 def nameGenerate(count = 1):
@@ -50,5 +51,8 @@ def nameGenerate(count = 1):
     for _ in range(count):
         ans.append(random.choice(nlist))
 
-    logFile.info('Generated ' + str(count) + ' names from nameGenerate().')
+    try:
+        logFile.info('Generated ' + str(count) + ' names from nameGenerate().')
+    except:
+        pass
     return ans

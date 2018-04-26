@@ -2,7 +2,7 @@ import random
 try:
     from log import FileLog
 except Exception as e:
-    print('Warning: Missing Filelog in log.py')
+    print('WARNING: Missing Filelog() in log.py')
 
 
 class ChristmasTree(object):
@@ -14,13 +14,19 @@ class ChristmasTree(object):
         _tree: List object, containing gifts that is on the
             tree.
     """
-    logFile = FileLog()
+    try:
+        logFile = FileLog()
+    except:
+        pass
 
     def __init__(self, giftlist = []):
         self.giftlist = giftlist
         self._tree = None
-
-        self.logFile.info('Christmas _tree created.')
+        
+        try:
+            self.logFile.info('Christmas _tree created.')
+        except:
+            pass
 
     def decorate(self):
         """ Load self.tree according to self.giftlist.
@@ -31,7 +37,10 @@ class ChristmasTree(object):
         self._tree = list(self.giftlist)
         self._tree = sorted(self._tree, key = lambda st:len(st))
 
-        self.logFile.info('Christmas _tree decorated.')
+        try:
+            self.logFile.info('Christmas _tree decorated.')
+        except:
+            pass
 
     def show(self):
         """ Display the Tree in formatted string according
@@ -44,7 +53,10 @@ class ChristmasTree(object):
             multiline string.
         """
         if self._tree == None:
-            self.logFile.error('Called Christmas_tree.show() before Christmas_tree.decorate().')
+            try:
+                self.logFile.error('Called Christmas_tree.show() before Christmas_tree.decorate().')
+            except:
+                pass
             raise Exception('Christmas _tree has not been decorated')
 
 
@@ -62,7 +74,10 @@ class ChristmasTree(object):
             giftcount += 1
             pos -= 1
 
-        self.logFile.info('Christmas _tree layers generated.')
+        try:
+            self.logFile.info('Christmas _tree layers generated.')
+        except:
+            pass
 
         #Count number of spaces
         charcount = [0 for _ in range(len(layers))]
@@ -84,7 +99,10 @@ class ChristmasTree(object):
             print()
             pos += 1
 
-        self.logFile.info('Successfully printed the Christmas tree.')
+        try:
+            self.logFile.info('Successfully printed the Christmas tree.')
+        except:
+            pass
 
     def gift(self, children):
         """ Send the gifts to children.
@@ -103,10 +121,18 @@ class ChristmasTree(object):
         for child in children:
             if len(self.giftlist) == 0:
                 print('Oops... The tree is empty!')
-                self.logFile.warning('Gift request denied: Christmas tree is empty.')
+
+                try:
+                    self.logFile.warning('Gift request denied: Christmas tree is empty.')
+                except:
+                    pass
+
                 break
             print(child + ' gets ' + self.giftlist.pop() + '!')
             giftcount += 1
 
-        self.logFile.info('Successfully gifted ' + str(giftcount) + ' present(s) to children.')
+        try:
+            self.logFile.info('Successfully gifted ' + str(giftcount) + ' present(s) to children.')
+        except:
+            pass
         self.decorate()
