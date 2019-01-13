@@ -56,17 +56,18 @@ results.
 
 ### 1. Singleton Implementation
 
-Consult the internet to find example implementations of a singleton in Python.
-Now adapt that example, and write your own logging framework.
+Christmas Tree FileLog
 
- - You can have a single handler which prints the log message to the screen.
- - Your log messages can just be simple strings.
- - Just use an INFO level and a WARNING level.
- - No need for logging filters.
- - No need for logging formatters.
- - But it is very important that wherever you create a new Logger, that it ends
-   up using the same set of handlers, (even though in this case there is only
-   a single handler class).
+A Christmas Tree program is contained in the ChristmasTree folder.
+
+ - Run the file using `python3 main.py`.
+ - Consult the internet to find example implementations of a singleton in Python.
+ - Add your own FileLog class in `log.py` so that wherever you create a new 
+   Logger, that it ends up using the same set of handlers, even though in
+   this case there is only a single handler class.
+    - Just use an INFO level and a WARNING level.
+    - No need for logging filters.
+    - No need for logging formatters.
 
 Bring your code to class and be prepared to paste it into a poll answer.
 
