@@ -38,7 +38,7 @@ A bad implementation will require a single global variable called language and h
 if LANGUAGE == 'en':
     print('You have gone bust!')
 elif LANGUAGE == 'de':
-    print('Du bist gegangen!')
+    print('Du bist Pleite gegangen!')
 elif LANGUAGE == 'es':
     print('¡Te has vuelto loco!')
 ```
