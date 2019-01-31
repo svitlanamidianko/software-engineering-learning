@@ -1,214 +1,245 @@
-## Security and Authentication
+## SQLAlchemy
+SQLAlchemy is a object-relational-mapper (ORM).  This means that it is able
+to map from object-oriented code that you write in Python into SQL commands
+that a database understands.
 
-Webservers often need to serve confidential information securely.  
-There are several things that can be done to help secure users' information.
-For today's session we will focus on securing a simple user/password
-combination, this is known as HTTP basic authentication.
+This layer of abstraction can allow an engineer to focus on writing good
+object-oriented code, while SQLAlchemy will then map this into easy access on a
+database.  Having a layer of abstraction allows one to easily change the
+underlying database.  It is common for testing code to use a SQLite database,
+while in production the code instead connects to a beefy server that is
+able to satisfy many simultaneous queries coming from many machines.
 
-We will also briefly touch on SQL injection, although if you are using
-SQLAlchemy to query your data then you should be protected from these
-vulnerabilities.
+## SQLAlchemy vs. SQLite3 
 
-### HTTP Basic Authentication
-A good introduction to basic authentication can be found at:
-https://www.httpwatch.com/httpgallery/authentication/
+Why don't we just use SQLite3 in Python (as seen in `SQLite3Sample.py`)?
 
-You are also encouraged to explore the code contained in the current directory.
+Using an ORM like SQLAlchemy allows code to be deployed across multiple database engines. Using a native relational database language like SQLite (not an abstraction layer like SQLAlchemy) works for local machines where file-based databases still work, but in cases where the same database may need to be accessed simultaneously from many computers over a network, this presents issues with latency and file corruption if the same part of the underlying database is modified at the same time. 
+
+The other convenient thing about SQLAlchemy is that the underlying database it's connected to -- whether SQLite3 or MySQL or Postgres -- can be changed quite painlessly, as opposed to rewriting each command (the engine interface that SQLAlchemy is connected to will just need to change). 
+
+For comparisons with an SQLite3 implementation in Python, compare `SQLAlchemySample.py` and `SQLite3Sample.py`. Check out this [link](http://www.sqlite.org/whentouse.html) to read more about when SQLite works well and when it doesn't.
+
+## SQLAlchemy Tutorial 
+
+Work through the SQLAlchemy tutorial here and then answer the questions at the bottom of the page. 
+
+### 1. Local Setup 
+
+First, install SQLAlchemy in terminal with:
+
 ```bash
-python3 runserver.py
+$ pip install sqlalchemy
 ```
 
-Notice how the first request generates a 401 response, and your browser will
-automatically show a username and password dialog box.  This username and
-password is then sent in the HTTP request headers.
+### 2. Setup on a Python Module 
 
-If the username and password are correct then the site will respond with a 200
-response code, and return the confidential information.  If the username and
-password do not match then there is again a 401 response.
+#### Import SQLALchemy 
 
-The code is neatly separated in the sense that all authentication occurs in a
-single file, and to use this functionality, a client simply has to decorate the
-appropriate endpoints with `requires_authorization`.
+```python 
+import sqlalchemy
+``` 
 
-For this section a lot of the code has been adapted from:
-https://larsbergqvist.wordpress.com/2016/09/03/basic-authentication-with-python-flask/
+#### Create Engine 
 
-### SQL Injection
-This section borrows from:
-https://www.acunetix.com/websitesecurity/sql-injection/
-
-Imagine the follow short excerpt of Python code:
-```python3
-# Define POST variables
-uname = request.form.get('username')
-passwd = request.form.get('password')
-
-# SQL query vulnerable to SQL injection
-sql = "SELECT id FROM users WHERE username='" + uname + "' AND password='" + passwd + "';"
-
-# Execute the SQL statement
-database.execute(sql)
+```python
+from sqlalchemy import create_engine 
+engine = create_engine('sqlite:///:memory:', echo = TRUE)
 ```
-This code is dangerous, and can lead to all sorts of damage being done to your
-database.
+ 
+What's happening with the `create_engine()` function?
 
-If a malicious user carefully crafted the following:
+The engine connects to the database, and this function specifies which database it should connect to.
+
+What is `sqlite:///`? Firstly, this initialises an SQLite Database, which allows us to use SQLite syntax the way we have learnt in prior classes.
+
+`:memory:` simply implies that the SQLite database will not persist beyond individual sessions.
+The database will only persist as long as the application instance is running. 
+
+If we do: 
+
+```python
+engine = create_engine('sqlite:///try_database.db') 
 ```
-user="alice';--"
-password="password"
+
+Then this creates a local .db file named `try_database.db` (if it doesn't exist already on your path). We will learn how to use SQLAlchemy to open up the .db file and see if there are any new entries. This `database.db` file will persist locally.
+
+#### Connect to engine 
+
+Now, connect to the engine interface that you created using the default `connect()` function. 
+
+```python
+engine.connect() 
 ```
-then the sql query would become:
-```sqlite3
-SELECT id FROM users WHERE username='alice'; --' AND password='password';"
+
+#### Declare a Base 
+
+The base maintains a catalogue of classes and tables in the base; each application will usually have one. 
+
+```python
+from sqlalchemy.ext.declarative import declarative_base
+Base = declarative_base() 
 ```
-Notice how the "--" will comment out the rest of the line, and so the check for
-a matching password is ignored. Most probably the calling code assumes that if
-an ID is returned then the password matched, and authentication has succeeded.
 
-In this case a malicious intruder can now log in with any username they choose,
-and do not need to know the password!
+After declaring a base, we will be able to define classes relative to the base. So each class should be created as class `'tablename'(Base)`.
 
-But it gets worse than that.  If an intruder is able to inject any SQL code
-they choose, then they can perform a denial of service query (ie. they can
-create an query that would output trillions of rows, and the database will
-start flooding the server with garbage).  They could insert any data that they
-wanted, or they could even drop tables!
+#### Create a Table Mapping
 
+Let's initialise a simple table `Users` by initialising a User class and writing a `__repr__()`method to represent the schema. 
 
-This comic is relevant: https://xkcd.com/327/
+```python
+from sqlalchemy import Column, Integer, String, ForeignKey 
+from sqlalchemy.orm import relationship, sessionmaker 
+
+class User(Base):
+	__table__ = 'users'
+	id = Column(Integer, primary_key = True)
+	name = Column(String)
+	insurance_id = Column(Integer)
+
+	def __repr__():
+		return "<User(id={0}, name={1}, insurance_id={2})>".format(self.id, self.name, self.insurance_id)
+```
+
+Let's create another table to display foreign relationships.
+
+```python
+class Insurance(Base):
+	__table__ = 'insurance'
+	id = Column(Integer, primary_key = True, ForeignKey('users.insurance_id'))
+	claim_id = Column(Integer)
+	users = relationship(User)
+```
+
+#### Create the Table Schema
+
+After defining the schema of the table, we will need to actually create it in our database.
+
+We have to call: 
+
+```python
+Base.metadata.create_all(engine)
+```
+
+This is very important, as without calling `create_all(engine)` and binding it to the engine, the schema will not be initialised. Your table should now be created, and you will be able to add elements to it. 
+
+## Adding Elements to the SQLAlchemy 
+
+In the same file, call the imports with: 
+
+```python
+from sqlalchemy.orm import sessionmaker 
+
+from sqlalchemy_declarative import Base, User
+```
+
+Create an instance of your `User` class with: 
+
+```python
+user = User(id = 1, name='sterne', insurance_id=1234)
+```
+
+And then add it to your DB, by starting a session. 
+
+```python
+from sqlalchemy.orm import sessionmaker  
+
+Session = sessionmaker(bind=engine)
+session = Session() 
+session.add(user)
+session.commit()
+```
+
+`user` should now be in your database! 
+
+## Querying your Table
+
+Let's check if `user` is in the database.
+
+```python
+print(session.query(User).filter_by(name='sterne').first())
+```
+
+It should print out: 
+
+```
+<User(id=1, name=sterne, insurance_id=1234)>
+```
+ 
+Great! 
+
+## Reflecting an Existing Database with SQLAlchemy
+
+Reflecting a table simply means being able to read its metadata, and being able to use SQLAlchemy to read the contents of the table. 
+
+```python
+from sqlalchemy import Table
+```
+
+`Table` is the name of the table you are referencing. Make sure that you are connected to the same engine that has the table you are aiming to reflect.
+
+### Reflect table from the engine: Table
+
+`users = Table('users', metadata, autoload=True, autoload_with=engine)`
+
+Load the table `users` that you initialised before with the above function.
+
+The `autoload_with=engine` parameter ensures that it's connecting to the right engine interface.
+
+### Print table metadata
+
+The `__repr__()` method that you defined in your `User(Base)` class will return a string detailing the details of your database in the format you chose.
+
+```
+print(repr(users))
+```
 
 
 ## Questions
 
-Come to class with the Python code for your multi-user Kanban board, and
-make sure that your passwords are suitably protected.
-You should also have your SQL injection attack code ready and be able to
-explain how and why your attack will work.
+Use the tutorial above as a guide to the following exercises. After reading the tutorial, check out the `SQLAlchemySample.py` file for a working implementation. 
 
-You must be able to paste any part of your code into a poll response.
+### Bank loans
 
-### 1. Try an SQL Injection Hack 
+From the bank loan exercise at the beginning of the unit:
+1. Rewrite all the `CREATE TABLE` commands for the Clients and Loans tables
+to now use SQLAlchemy. The SQLAlchemy commands should also create primary key
+and foreign key constraints where appropriate.
+2. Rewrite an `INSERT` command to now use SQLAlchemy. In particular, you
+should hold all the values in a standard Python container (e.g. list,
+dictionary, or namedtuple), or a combination of Python containers (e.g. list of
+dictionaries).  The insertions should all happen in a single transaction.
+3. Rewrite a `SELECT` query and an `UPDATE` command to now use SQLAlchemy.
+4. Now that you better understand indexing, modify your python code to also
+create indexes on relevant columns so that none of your queries from the
+previous question will do a full table scan.
+4. (Optional) Get SQLAlchemy to output the real SQL commands that it sends to
+SQLite (this is shown in the recommended tutorial on SQLAlchemy).  How do these
+commands compare with the SQL that you wrote manually?  Identify any
+differences, and find out why SQLAlchemy has done it differently.
 
-It's time to give SQL Injection a shot using the `'' OR ''=''` SQL trick (which always returns True). Here's a hack to try at https://sqlzoo.net/hack/ to see if you can successfully gain access to a user's account.
+### Online retailer
+From the session on transactions:
+1. Rewrite all the `CREATE TABLE` commands for the tables contained in
+`retail.sql` to now use SQLAlchemy. The SQLAlchemy commands should also create
+primary key and foreign key constraints where appropriate.
+2. Rewrite all the `INSERT` commands to now use SQLAlchemy. In particular, you
+should hold all the values in a standard Python container (e.g. list,
+dictionary, or namedtuple), or a combination of Python containers (e.g. list of
+dictionaries).  The insertions should all happen in a single transaction.
+3. Rewrite all your transactions from the exercise to now use SQLAlchemy.
+4. (Optional) Get SQLAlchemy to output the real SQL commands that it sends to
+SQLite (this is shown in the recommended tutorial on SQLAlchemy).  How do these
+commands compare with the SQL that you wrote manually?  Identify any
+differences, and find out why SQLAlchemy has done it differently.
 
-1. Log in to the forum as "Jake" by passing "xxx" into the username and an SQL injection into the password. 
-2. (Optional) Acquire a user's password and then log into the main forum. Post something there as the user. 
+### (Optional) Unit of Work
+SQLAlchemy uses the unit-of-work design pattern to decide when to send updates to the
+database.  Read up on the unit-of-work design pattern, and then look at the
+source code of SQLAlchemy where it implements it:
 
-Walk through each of the tutorials to try to gain access to a user's account, then post something on the forum if you are able to! 
+https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/orm/unitofwork.py
 
-### 2. Write an SQL injection
-Assume the following tables exist:
-```sqlite3
-CREATE TABLE users (
-    userid INT PRIMARY KEY,
-    username TEXT,
-    email TEXT,
-    password TEXT
-);
-CREATE TABLE friends (
-    friendid INT PRIMARY KEY,
-    userid INT,
-    name TEXT,
-    phone DATETIME,
-    age INT
-);
-```
-And you have found the following two queries:
-```python3
-"SELECT userid FROM users WHERE username='" + uname + "' AND password='" + passwd + "';"
-"SELECT name, phone, age FROM friends WHERE friendid = " + id + ";"
-```
-The webserver code will return an error if the first query returns a set of
-results without a column called `id` that contains integers.  There will also be a
-webserver error if the second query returns results without a column containing
-`name` (of strings), a column containing `phone` (of strings), and `age` (of
-integers).  If you're modifying or deleting things in the database then it
-doesn't matter if the server raises an error, but if you'd like to see data
-that's not meant for you then you need to make sure that the database doesn't
-raise any errors.
-
-Now do the following:
-1. Write an attack which will list all the usernames and their passwords.
-2. Write an attack which will update the table so that every entry in the
-friends table has their userid set to 42.  (Hopefully this is the id of *your*
-account, and now everyone has to be friends with you.  Who said hackers were
-loners and never had any friends!)
-3. Write an attack which will drop both tables.
-4. (Optional) If you didn't know the name or schema of the tables, then write an
-SQL injection attack which will list all the tables.  Now write an attack which
-will list all columns within a given table.
-
-
-### 3. Multiple User Kanban
-
-Extend your Kanban board from previous weeks to allow multiple users.  Each
-user should have their own username and password. For now assume that each
-user wants their own **private** board (i.e. there are no shared Kanban boards).
-
-### 4. Secure the user passwords
-If you used the example code from `requires_authorization.py` then you will see
-that usernames and passwords are stored directly in code, and passwords are
-stored as plain text. To solve this properly, you will need to:
-1. Store the user details in the database
-2. Do not store the password in the database, instead store a cryptographic hash
-of the password.
-3. Make sure that the password is salted, and that the salt is unique for each
-user. This helps significantly slows down intruders if they gain access to the
-usernames and password hashes.
-
-To read more about salting passwords, consider reading:
-https://crackstation.net/hashing-security.htm
-Although for our purposes, a standard hash function like md5 will be sufficient
-and is already available in the standard Python libraries.
-
-### 5. (Optional) SSL Certificates
-HTTP basic authentication sends the username and password in plain text.  This
-means that anyone who is handling web traffic and handles the request will be
-able to see the username and password.  To avoid this the connection should
-always be encrypted - HTTPS.  
-
-In the original example
-https://larsbergqvist.wordpress.com/2016/09/03/basic-authentication-with-python-flask/
-there was already support for ssl.  
-
-```python3
-if __name__ == '__main__':
-      app.run(host='0.0.0.0', port=443)
-```
-
-HTTPS usually runs on port 443.  To run a webserver with a port in the range
-0-1023 you will need root permissions.  Typically this can be run using:
-```
-$ sudo python3 runserver.py
-```
-In production the ssl security layer is usually handled separately by a reverse
-proxy server like nginx or Apache.
-
-### 6. (Optional) Change the password
-
-It's a pretty essential requirement that at some point you are able to log into
-the system and change your password.  Add this functionality to your Kanban
-board.  
-
-If you're also interested then you can also think about the required
-flow for implementing a "Forgot your password" user flow.  This would require
-having access to an SMTP server, and is overkill for our requirements!
-Instead when the forgot password link is clicked, simply print the appropriate
-URL to visit in the server logs.  This URL should contain a large random token
-which makes it difficult for anyone else to guess the URL.
-
-### 7. (Optional) Use a third party OAuth2 for user authentication
-
-The complexity required in terms of managing a multitude of different passwords
-across many different websites has meant that users typically prefer third party
-authentication. This leads us to the final optional question.
-
-There are several Python packages which simplify the process of getting a third
-party login.  
-
- - https://pythonhosted.org/Flask-GoogleLogin/
- - https://authomatic.github.io/authomatic/
-
-Do some research on the internet and find out how to get client credentials from
-one of the main identity providers - eg. Google or Facebook.  Now add the third
-party authentication to your Kanban application!
+Now write a very high-level python implementation which captures the essential
+idea behind the design, while skipping over much of the complexity in a real
+implementation.
