@@ -1,118 +1,92 @@
-## ACID and transactions
+## The Flask Microframework
 
-As a database grows in complexity there tends to emerge natural constraints as
-part of the data modeling process. Fortunately SQL provide ACID guarantees,
-which can prevent any inconsistencies violating those constraints.  
+Flask is called a microframework because it is lightweight and minimalistic, providing the bare bones of features a simple web application requires. It is able to support basic HTTP requests, connections to databases and a frontend. 
 
-An example
-might be a book exchange database.  Every time two people swap a book then
-there are two updates that need to happen. One new entry in the database
-showing that book A was given to person 1 from person 2, and another entry
-showing that book B was given to person 2 from person 1.  If these two updates
-are interrupted halfway through then it will look like book A was given with
-nothing given in return.  This would defeat the whole point of a book exchange.
-The problem only gets more acute when dealing with money (the books don't
-balance).
+## Preclass 
 
-It is far better to make the updates all-or-nothing (atomic).  This means that
-the database is always in a consistent state.  Today's exercises focus on sets
-of instructions that must all succeed, or all fail to ensure that the database
-is left in a consistent state.
+Work through either 1, 2 or 3. After that, if you wish to, you can work on 4.  
+
+### 1. Flaskr Microblogging Tutorial: 
+
+The official Flask tutorial covers setting up a simple microblogging
+application. Work through the application here:
+http://flask.pocoo.org/docs/0.12/tutorial/
+
+If you want to compare your results with the final output, have a look here:
+https://github.com/pallets/flask/tree/master/examples/flaskr/
+
+
+### 2. A Basic Todo Application:
+
+Follow the youtube video at: https://www.youtube.com/watch?v=4kD-GRF5VPs
+
+```bash
+pip3 install flask Flask-SQLAlchemy
+```
+
+Once the program is running, then you can visit: http://127.0.0.1:5000/ and see
+everything working!  Try adding new tasks and then marking them as done.
+
+Notice how straightforward it is to use SQLAlchemy with Flask.  It is strongly
+encouraged that you use SQLAlchemy for both your final project and your web
+assignment.
+
+(Optional) Find out how to use checkboxes to mark an item as complete.
+
+### 3. The Simplest Flask Application Ever: 
+
+Build a super-simple Flask application to your liking. Some ideas include: 
+
+1. Dice rolling service;
+2. Email generator service;
+3. A service that builds on the pre-class work you did for 9.1, the HTTP Requests class, like:
+	- For instance, a simple maps service that pulls map data from Google Maps API 
+	- A service to query for current weather in different cities 
+	- A service to query for current cryptocurrency market prices
+	- A service to query times in another time zone 
+4. Password generator (although it's bad to generate the passwords server side!)
+
+Your web application should incorporate at least: 
+1. One HTTP `GET` request that retrieves something from either a local database or an online service. 
+2. One HTTP `POST` request. This will involve creating a form that takes user input (via HTML forms or Flask forms like WTForms).
+3. A simple HTML frontend that has a form and has fields to output the values for your service.
+
+Keep it short and simple! 
+
+You should be able to visit your site at: http://127.0.0.1:5000/. 
+
+### 4. (Optional) Building a JSON API in Flask
+
+It is best practice to separate out your application data from the presentation
+of the data.  Taken to its logical conclusion this leads to a clean separation
+between static HTML and a JSON API.  (Just like those APIs that were queried
+in the previous session.)  
+
+Investigate the `jsonify()` method in Flask, as well as Flask `MethodViews`.
+Together these can build a JSON API using sound object oriented principles.
+As an example, one can use inheritance to ensure consistency between similar
+end points.
+
+One downside of this approach is that you now need to make client side requests.
+Typically this is done in the webpage using JavaScript (or a JavaScript
+framework).  There isn't enough time in this course to adequately cover
+JavaScript, but if you already know some, or are willing to put the effort into
+learning it, then please do so for this unit and/or the final project!
 
 ## Questions
 
-### Write-ahead logging
-Read up on [write-ahead logging](https://www.sqlite.org/wal.html). Using the
-ideas contained there, write out a small example showing several updates being
-made to a database using a write-ahead log.  Show that if the update is
-interrupted at any point then the database will be able to revert to a
-consistent state.
+### 1. Kanban server
 
-This question does not require any code, but it does require a clear, detailed,
-step-by-step description of the process.  
+After working through the Flaskr example and watching the ToDo application being
+built, you should feel comfortable building your own Kanban application.
 
-### Online retailer
-In `retail.sql` is a possible database design for a large online retail company.
-This company has several warehouses, and each warehouse is filled with
-several thousand products.  Each product can come from one or more
-suppliers, but will only ever be stored in a single warehouse.
-Each warehouse has a single delivery company which handles all the
-logistics of delivering to a customer.  Fortunately for us, each
-customer only has a single address.
+Your Kanban application should be able to:
+1. Create a new item in the "To do" state.
+2. Move any item from any state ("To do", "Doing", or "Done") to any other state.
+3. Delete an item when it is done.
+4. Perform some basic styling using a CSS file.  (This is shown in step 8 of the
+   Flaskr tutorial)
 
-The retailer receives orders.  Each order consists of one or more
-items to be purchased.  If the item is not available, then it will be
-automatically ordered from the cheapest supplier.  
-
-Here is an example transaction for all the needed updates when Gertrud orders
-a single widget from us, and we still have sufficient stock in the ABC warehouse:
-```SQLite
-BEGIN TRANSACTION;
-INSERT INTO Orders VALUES (1001, 2000, "2025-01-01 10:00:00", 202501);
-INSERT INTO OrderItems VALUES (1001, 3001, 1);
-UPDATE Inventory SET Quantity = Quantity - 1 WHERE WarehouseID=4001 AND ProductID=3001;
-SELECT Quantity FROM Inventory WHERE WarehouseID=4001 AND ProductID=3001;
-END TRANSACTION;
-```
-Notice that at the end we do a select to double check that we still have
-sufficient stock in the warehouse.  (If there were a negative amount, then we
-might have to rollback the transaction and order from the suppliers instead.)
-
-Now answer the following:
-1. Add all the primary key and foreign key constraints. (This will probably
-require you to also reorder some of the table declarations.)
-1. Write a transaction for a delivery from the Widge supplier which has just
-arrived at the ABC warehouse and unloaded 99 new Widgets.
-2. Write a transaction for a Customer order of 500 Wodgets which places an order
-with the cheapest supplier.  (Be sure to find the cheapest supplier
-automatically, rather than hardcoding your answer.)
-3. What statements would be needed to update a customer's details to their new
-address, while still maintaining referential integrity?
-4. What steps would we need to take to delete a product from the Product table,
-while still maintaining referential integrity?  Put all of these statements
-together into a transaction.  What collateral damage would be done if a product
-was deleted?  (In practice, a product will almost never get deleted unless it
-has never been referenced in any other table.)
-5. Critique the database design.  What data should be in the database schema,
-but isn't?
-
-
-### Stock trading data
-Your company has subscribed to a share trading data feed from the NYSE.  This
-data feed lists all the orders placed and all the sales that occur.  
-Some orders get cancelled before they can be filled.  
-
-Each order is either to buy or sell a certain number of shares in a particular
-company.  The order lists which trading desk placed the order, and if the order is
-filled then the trading desk that filled the order is also listed.
-
-At the beginning of the year, your company also received a snapshot of which
-trading desks owned which stocks for all the companies listed on the NYSE.
-By using the snapshot as a starting point, one can use the successful trades
-to update your estimate of all the trading desk portfolios.
-
-As an example, if you knew that the Delta Trading desk had 100 shares of XOM,
-and the feed showed another purchase of 100 shares then you knew that Delta
-Trading now had 200 shares.
-
-As part of its corporate strategy, your company monitors everyone's portfolios
-on a daily basis.  It also monitors the number of sell orders and the number
-of buy orders placed by a trading desk every day for every company on the NYSE.
-
-All the orders also get rolled into summary tables for each company.  These
-summary tabes list the total number of orders placed, the total number of
-orders filled, the total number of shares exchanged, the total number of
-dollars exchanged, the minimum price, and the maximum price. This summary
-is generated on a daily basis for every company.
-
-1. Design all the SQL tables you need to capture the above requirements.
-2. Write the `CREATE TABLE` statements to implement your design.
-3. `INSERT` some example data that you have made up.
-4. Now write a transaction that updates the portfolios for both the selling
-company and the buying company.  This must also then update the summary tables.
-5. What would happen if the statements were not wrapped in a transaction, and
-everything went smoothly?  What would happen if the set of updates were
-interrupted halfway through?
-
-(This is not intending to be a very realistic question, but more a question
-around data modeling, and transactions!)
+Note that this is not the complete Kanban application required for the
+assignment.  The next session will be on authentication which will allow
+multiple users to simultaneously use the service.

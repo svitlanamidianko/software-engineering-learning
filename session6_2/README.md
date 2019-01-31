@@ -1,57 +1,122 @@
-## Data Normalization
-Data normalization refers to the degree to which potentially-shared
-information is moved into separate tables.
+## Making HTTP requests
+This pre-class work can be quite long if you have had no previous exposure to
+HTML and web programming.  In this case you are encouraged to find someone with
+some prior experience and work together.  (Conversely, if you do have any prior
+experience, then you are encouraged to find someone with no web experience to
+help them!)
+
+### HTML Forms
+The first time that you usually encounter an HTML request (other than a GET
+request) is in an HTML form.  The following (freely-available) short course uses
+active learning to help you understand HTML forms:
+https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms
+
+For this session you will need to work through the following guides:
+1. Your first HTML form
+2. How to structure an HTML form
+3. The native form widgets
+4. Sending form data
+
+After which you should feel comfortable tackling question 1.
+
+### Python HTTP requests
+However, we can also query the web through a python program.  There are many
+ways of making http requests programmatically.  A nice library is the `requests`
+library.  You can install it using:
+```python3
+pip3 install requests
+```
+Now work through [the guide to HTTP requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview).
+
+And then read through the [quickstart for python requests](http://docs.python-requests.org/en/master/user/quickstart/).
+
+### JSON
+The web services listed below all return information in a format known as JSON.
+Fortunately for us it is straightforward to turn the JSON back into standard
+python objects that you are already familiar with.
+
+As an example (borrowed from the requests tutorial), here is a call to github,
+which is then read into a python list of python dictionaries:
+```python3
+>>> import requests
+>>> r = requests.get('https://api.github.com/events')
+>>> r.json()
+[{u'repository': {u'open_issues': 0, u'url': 'https://github.com/...
+```
 
 ## Questions
-### Definitions of normalization
-Search the internet and find good definitions and examples of the following:
-- First normal form
-- Second normal form
-- Third normal form
-- Denormalization
-- Composite key
+Everyone must complete question 1, and then find out which remaining question
+they need to answer using the following python code:
+```bash
+$ python3 utils/personal_exercises.py
+```
 
-Simple examples given [here]( https://www.essentialsql.com/get-ready-to-learn-sql-database-normalization-explained-in-simple-english/), and [here](https://www.youtube.com/watch?v=UrYLYV7WSHM)
-but you might find better resources.
+**Be sure to bring both your HTML form, and your (single) python program to class,
+and be ready to paste either of them in as a poll response.**
 
-### Road racing association
-##### Description
-You are contracted out to set up a database for an association of road-runners.
-They organize many different races through-out the year. Some of the races get
-put into different challenges.  So for example, there could be the following
-races:
-- The ruby marathon
-- The bridge challenge
-- The sea to mountain sprint
-- Flat and fast marathon
-- The wine route stroll
+### 1. Kanban form
 
-And there could be two challenges:
-- **The marathon challenge:**
-    - the ruby marathon;
-    - the flat and fast marathon.
-- **The terrain challenge:**
-    - the bridge challenge;
-    - the sea to mountain;
-    - the ruby marathon.
+Build on your work from the previous session in which you designed a basic
+Kanban website. For today's class you need to build a small HTML form which
+will allow you to write a short description of the task which you want to add
+to the board.
 
-Notice that not all races belong to a challenge, and some races belong to more
-than one challenge.  These challenges repeat every year, but
-with subtle differences sometimes (e.g. a new race might be included,
-or a particular race is unable to be run that year).
+### 2. The Current Weather
 
-The association needs to be able to keep track of which runners entered
-which races, and what their running times were.  A few weeks after the
-final race in a particular challenge has been run, the results will get
-emailed or posted out.
+Here is an example link to return weather data in JSON format for [London](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22london%2C%20uk%22)&format=json)
 
-##### Original Design
-1. Design all the SQL tables you need to capture the above requirements.
-2. Write the `CREATE TABLE` statements to implement your design.
-3. `INSERT` some example data that you have made up.
-4. Write a SQL query to find the top 3 fastest women runners for a given race.
-5. Write a SQL query to find all the runners' email addresses that
-successfully finished the marathon challenge.
+Write a short Python program which queries the Yahoo weather API and then prints
+out a short forecast in plain text:
+```text
+11 Feb 2018: Rain
+12 Feb 2018: Sunny
+13 Feb 2018: Showers
+```
 
-**Bring your design and your alternate design(s) to class and be prepared to
-explain them**
+### 3. Crypto Exchange
+
+Here is an example link to return crypto currency data in JSON format:
+https://poloniex.com/public?command=returnTicker
+
+Write a short Python program which queries the Poloniex Exchange API and then
+prints out a list of the latest trading prices in plain text:
+```text
+BTC_OMNI : 0.00005140
+BTC_ETH : 0.0.10150000
+BTC_ETC : 0.00296001
+```
+https://poloniex.com/support/api/
+
+### 4. Google directions
+
+Here is an example link to return travel information in JSON format:
+http://maps.googleapis.com/maps/api/directions/json?origin=Chicago,IL&destination=Los+Angeles,CA
+
+Write a short Python program which queries the Google Maps API and then
+prints out the distance and time it will take for the journey:
+
+```text
+Traveling from: Chicago, IL, USA
+Traveling to:   Los Angeles, CA, USA
+Distance:       2,015 mi
+Duration:       1 day 5 hours
+```
+More documentation of the fields can be found [here](https://developers.google.com/maps/documentation/directions/start).
+
+### 5. Flying Aircraft
+
+Here is an example link to return all currently-airborne aircraft in JSON format:
+https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json
+
+Write a short Python program which queries the flight tracking API and then
+prints out the country, ICAO code, and altitude:
+
+```text
+Italy : C43240
+Unknown or unassigned country : 6ACDDC : 7652
+Denmark : CF213F : 5979
+Unknown or unassigned country : 6C86E1 : 2936
+Germany : E577B0 : 5600
+```
+
+More documentation of the fields can be found [here](https://www.adsbexchange.com/datafields/).
