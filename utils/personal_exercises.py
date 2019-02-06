@@ -17,6 +17,6 @@ if __name__ == '__main__':
     print(problem_choice(email, '3.2', ['2-Logging', '3-Graphics']))
     print(" ")
     print('For seminar 9.1:')
-    print(problem_choice(email, '9.1',
-                         ['2. The Current Weather', '3. Crypto Exchange',
-                          '4. Google directions', '5. Flying Aircraft']))
+    print(problem_choice(email, '6.2',
+                         ['2-The Current Weather', '3-Crypto Exchange',
+                          '4-Google directions', '5-Flying Aircraft']))

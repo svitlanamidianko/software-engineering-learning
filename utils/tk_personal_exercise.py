@@ -45,7 +45,7 @@ class mainWindow(object):
             self.label_top = Label(self.master,text='For seminar 3.2:').pack()
             self.label = Label(self.master,text=problem_32).pack()
 
-            self.label_2_top = Label(self.master,text='For seminar 9.1:').pack()
+            self.label_2_top = Label(self.master,text='For seminar 6.2:').pack()
             self.label_2 = Label(self.master,text=problem_91).pack()
         except AttributeError:
             self.label_warning = Label(self.master,text="You need to input your Minerva Email address first!")

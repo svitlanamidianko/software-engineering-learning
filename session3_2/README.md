@@ -10,6 +10,12 @@ the following:
 ```bash
 $ python3 utils/personal_exercises.py
 ```
+
+Or try out the tkinter interface:
+```bash
+$ python3 tk_personal_exercise.py
+```
+
 Once you've entered your email address, you will find out whether to answer
 question 2 or question 3 for this seminar.
 

@@ -51,6 +51,11 @@ they need to answer using the following python code:
 $ python3 utils/personal_exercises.py
 ```
 
+Or try out the tkinter interface:
+```bash
+$ python3 tk_personal_exercise.py
+```
+
 **Be sure to bring both your HTML form, and your (single) python program to class,
 and be ready to paste either of them in as a poll response.**
 
