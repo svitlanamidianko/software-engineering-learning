@@ -1,64 +1,57 @@
-## An HTML Primer
-
-The next few sessions will focus on web technologies.
-
-The following (freely-available) short course uses active learning to help you
-understand HTML:
-https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML
-
-It consists of the following guides:
-1. Getting started with HTML
-2. Metadata in HTML
-3. HTML text fundamentals
-4. Creating hyperlinks
-5. Advanced text formatting
-6. Document and website structure
-7. Debugging HTML
-
-Work through the guides at your own pace.  If you are comfortable with the
-material then you can skip any sections as you see fit.
+## Data Normalization
+Data normalization refers to the degree to which potentially-shared
+information is moved into separate tables.
 
 ## Questions
+### Definitions of normalization
+Search the internet and find good definitions and examples of the following:
+- First normal form
+- Second normal form
+- Third normal form
+- Denormalization
+- Composite key
 
-### 1. Work through the exercise in debugging HTML
-The final guide in the course involves [debugging some badly written html]
-(https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Debugging_HTML).
+Simple examples given [here]( https://www.essentialsql.com/get-ready-to-learn-sql-database-normalization-explained-in-simple-english/), and [here](https://www.youtube.com/watch?v=UrYLYV7WSHM)
+but you might find better resources.
 
-Work through the tutorial and fix all the bugs you can find.
+### Road racing association
+##### Description
+You are contracted out to set up a database for an association of road-runners.
+They organize many different races through-out the year. Some of the races get
+put into different challenges.  So for example, there could be the following
+races:
+- The ruby marathon
+- The bridge challenge
+- The sea to mountain sprint
+- Flat and fast marathon
+- The wine route stroll
 
-It is always good practice to submit your HTML to an online validation service
-which can highlight any issues there might be.  Make sure that your final
-solution [validates](https://validator.w3.org/) successfully.
+And there could be two challenges:
+- **The marathon challenge:**
+    - the ruby marathon;
+    - the flat and fast marathon.
+- **The terrain challenge:**
+    - the bridge challenge;
+    - the sea to mountain;
+    - the ruby marathon.
 
-Be sure to bring the valid HTML to class and be able to paste it in as a poll
-response.
+Notice that not all races belong to a challenge, and some races belong to more
+than one challenge.  These challenges repeat every year, but
+with subtle differences sometimes (e.g. a new race might be included,
+or a particular race is unable to be run that year).
 
-### 2. Kanban board
+The association needs to be able to keep track of which runners entered
+which races, and what their running times were.  A few weeks after the
+final race in a particular challenge has been run, the results will get
+emailed or posted out.
 
-A Kanban board is a simple form of task management.  Every task that you add
-can be in one of three states:
+##### Original Design
+1. Design all the SQL tables you need to capture the above requirements.
+2. Write the `CREATE TABLE` statements to implement your design.
+3. `INSERT` some example data that you have made up.
+4. Write a SQL query to find the top 3 fastest women runners for a given race.
+5. Write a SQL query to find all the runners' email addresses that
+successfully finished the marathon challenge.
 
-1. To do
-2. Doing
-3. Done
-
-Please find a few example Kanban board websites and play around with it so that
-you have a clear idea of the typical layout of a Kanban board.
-
-Now design a simple static html webpage as a mockup of your own Kanban website.
-It is not necessary to include graphics, but could be a nice
-If you want to make your website look beautiful, then you should also read up on
-[CSS styling](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS).  
-An example of using CSS to create a 3 column layout is given
-[here](https://www.w3schools.com/howto/howto_css_three_columns.asp),
-with an alternative approach gven [here](https://www.w3schools.com/css/css3_multiple_columns.asp).
-
-*For now you do not need to have any forms on your website,, as we will cover
-HTML forms in the next session.*
-
-Make sure that your final solution [validates](https://validator.w3.org/)
-successfully. Be sure to bring screenshots of your final design, along with the
-valid HTML, to class.
-
-(Note that this Kanban board will be developed further in later sessions and
-eventually submitted as an assignment.)
+**Bring your design and your alternate design(s) to class and be prepared to
+explain them**
