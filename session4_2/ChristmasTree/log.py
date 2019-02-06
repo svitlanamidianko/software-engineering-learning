@@ -7,7 +7,7 @@ can be only one Filelog object at any time of this
 program - that is, a second Filelog object will lead to
 exact the same instance in the memory as the first one. 
 
-At least three methods is required:
+At least three methods are required:
 info(msg), warning(msg), and error(msg).
 '''
 #class FileLog():
