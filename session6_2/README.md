@@ -66,16 +66,20 @@ Kanban website. For today's class you need to build a small HTML form which
 will allow you to write a short description of the task which you want to add
 to the board.
 
-### 2. The Current Weather
+### 2. Pokemon
 
-Here is an example link to return weather data in JSON format for [London](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22london%2C%20uk%22)&format=json)
+Here is an example link to return Pokemon data in JSON format (https://pokeapi.co/api/v2/pokemon/charmeleon). You can see the documentation of Pokemon API at https://pokeapi.co/docs/v2.html.
 
-Write a short Python program which queries the Yahoo weather API and then prints
-out a short forecast in plain text:
+Choose your favorite Pokemon, and write a short Python program which queries the Pokemon API and then prints its base statistics (Attack, Defense, HP, Sp. Atk, Sp. Def, Speed)
+in plain text:
 ```text
-11 Feb 2018: Rain
-12 Feb 2018: Sunny
-13 Feb 2018: Showers
+Charmeleon
+Attack: 64
+Defense: 58
+HP: 58
+Sp. Atk: 80
+Sp. Def: 65
+Speed: 80
 ```
 
 ### 3. Crypto Exchange
