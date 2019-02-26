@@ -13,7 +13,7 @@ application. Work through the application here:
 http://flask.pocoo.org/docs/0.12/tutorial/
 
 If you want to compare your results with the final output, have a look here:
-https://github.com/pallets/flask/tree/master/examples/flaskr/
+https://github.com/pallets/flask/tree/master/examples/tutorial/flaskr
 
 
 ### 2. A Basic Todo Application:
