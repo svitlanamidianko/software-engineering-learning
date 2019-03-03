@@ -2,7 +2,7 @@
 PRAGMA foreign_keys = ON; -- activates foreign key features in sqlite. It is disabled by default
 
 CREATE TABLE Clients (
-    CLIENTNUMBER INT,
+    CLIENTNUMBER INTEGER PRIMARY KEY, -- needs to be primary key for foriegn_keys to work
     FIRSTNAME VARCHAR(20),
     SURNAME VARCHAR(20),
     EMAIL VARCHAR(100),
