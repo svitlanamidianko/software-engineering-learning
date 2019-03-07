@@ -45,7 +45,7 @@ which races, and what their running times were.  A few weeks after the
 final race in a particular challenge has been run, the results will get
 emailed or posted out.
 
-##### Original Design
+##### Design
 1. Design all the SQL tables you need to capture the above requirements.
 2. Write the `CREATE TABLE` statements to implement your design.
 3. `INSERT` some example data that you have made up.
@@ -53,5 +53,4 @@ emailed or posted out.
 5. Write a SQL query to find all the runners' email addresses that
 successfully finished the marathon challenge.
 
-**Bring your design and your alternate design(s) to class and be prepared to
-explain them**
+**Bring your design to class and be prepared to explain it**
