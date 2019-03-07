@@ -4,7 +4,11 @@ Flask is called a microframework because it is lightweight and minimalistic, pro
 
 ## Preclass
 
-Work through either 1, 2 or 3. After that, if you wish to, you can work on 4.  
+Work through either 1, 2 or 3. Question 4 is optional.
+Finally, question 5 applies what you've learned to your assignment for
+this module and must be answered. You will be asked to paste in a portion of
+your Kanban server code in as a poll response, so please have this handy when
+you come to class.
 
 ### 1. Flaskr Microblogging Tutorial:
 
@@ -73,11 +77,9 @@ framework).  There isn't enough time in this course to adequately cover
 JavaScript, but if you already know some, or are willing to put the effort into
 learning it, then please do so for this unit and/or the final project!
 
-## Questions
+### 5. Kanban server
 
-### 1. Kanban server
-
-After working through the Flaskr example and watching the ToDo application being
+After working through a Flask example and watching the ToDo application being
 built, you should feel comfortable building your own Kanban application.
 
 Your Kanban application should be able to:
