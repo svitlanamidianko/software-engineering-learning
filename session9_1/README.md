@@ -21,6 +21,10 @@ is left in a consistent state.
 
 ## Questions
 
+### ACID guarantees
+Research and understand ACID guarantees (atomicity, consistency, isolation, 
+durability), for example [here](https://www.geeksforgeeks.org/acid-properties-in-dbms/).
+
 ### Write-ahead logging
 Read up on [write-ahead logging](https://www.sqlite.org/wal.html). Using the
 ideas contained there, write out a small example showing several updates being
