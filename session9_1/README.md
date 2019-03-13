@@ -21,6 +21,10 @@ is left in a consistent state.
 
 ## Questions
 
+### ACID guarantees
+Research and understand ACID guarantees (atomicity, consistency, isolation, 
+durability), for example [here](https://www.geeksforgeeks.org/acid-properties-in-dbms/).
+
 ### Write-ahead logging
 Read up on [write-ahead logging](https://www.sqlite.org/wal.html). Using the
 ideas contained there, write out a small example showing several updates being
@@ -104,6 +108,10 @@ summary tabes list the total number of orders placed, the total number of
 orders filled, the total number of shares exchanged, the total number of
 dollars exchanged, the minimum price, and the maximum price. This summary
 is generated on a daily basis for every company.
+
+A revision of [insert into select](https://www.w3schools.com/sql/sql_insert_into_select.asp) 
+statements may help in creating the summary tables.
+
 
 1. Design all the SQL tables you need to capture the above requirements.
 2. Write the `CREATE TABLE` statements to implement your design.
