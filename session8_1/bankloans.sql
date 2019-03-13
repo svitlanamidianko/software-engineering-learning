@@ -11,12 +11,12 @@ CREATE TABLE Clients (
 );
 
 CREATE TABLE Loans (
-    ACCOUNTNUMBER INT, --A unique integer to identify this account
-    CLIENTNUMBER INT, -- An integer to identify the client (clients may have more than one account)
+    ACCOUNTNUMBER INTEGER, --A unique integer to identify this account
+    CLIENTNUMBER INTEGER, -- An integer to identify the client (clients may have more than one account)
     STARTDATE DATETIME, -- The time that this account was created
-    STARTMONTH INT, -- The month for which the first repayment is due (201805 means May 2018)
-    TERM INT, -- Over how many months the loan must be repaid
-    REMAINING_TERM INT, -- How many months remain
+    STARTMONTH INTEGER, -- The month for which the first repayment is due (201805 means May 2018)
+    TERM INTEGER, -- Over how many months the loan must be repaid
+    REMAINING_TERM INTEGER, -- How many months remain
     PRINCIPALDEBT NUMERIC(11, 2), -- The size of the initial loan
     ACCOUNTLIMIT NUMERIC(11, 2), --
     BALANCE NUMERIC(11, 2), -- How much is currently owed
