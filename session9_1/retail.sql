@@ -71,7 +71,7 @@ CREATE TABLE SupplierOrders(
     DateDue DATE,
     FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID),
     FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
-    FOREIGN KEY (WarehouseID) REFERENCES Warehouse(WarehouseID),
+    FOREIGN KEY (WarehouseID) REFERENCES Warehouse(WarehouseID)
 );
 CREATE TABLE Customer (
     CustomerID INT,
