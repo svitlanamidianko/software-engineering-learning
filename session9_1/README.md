@@ -109,6 +109,10 @@ orders filled, the total number of shares exchanged, the total number of
 dollars exchanged, the minimum price, and the maximum price. This summary
 is generated on a daily basis for every company.
 
+A revision of [insert into select](https://www.w3schools.com/sql/sql_insert_into_select.asp) 
+statements may help in creating the summary tables.
+
+
 1. Design all the SQL tables you need to capture the above requirements.
 2. Write the `CREATE TABLE` statements to implement your design.
 3. `INSERT` some example data that you have made up.
