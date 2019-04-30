@@ -13,6 +13,10 @@ Docker is reasonably lightweight in terms of how much memory and CPU it will use
 on your laptop, but you are still encouraged to exit docker before coming to
 class!
 
+**On Windows**
+
+Docker Desktop for Windows requires Hyper-V, which is only supported for 64-bit Windows 10 Pro, Enterprise or Education. Windows 10 Home users, as well as users of 32-bit versions and older versions of Windows have to resort to a legacy solution, and use the outdated "Docker Toolbox". See [this link](https://docs.docker.com/toolbox/toolbox_install_windows/).
+
 ### 2. Do the tutorial
 First work through the 6 part tutorial on docker.  For this session focus on
 sessions one and two.
@@ -32,6 +36,10 @@ This command will run the container in detached mode, and will connect port 5000
 on your local machine to port 5000 of the container.  You can verify this by
 visiting `http://localhost:5000/` and you should see the interface to the
 computation server.
+
+**On Windows Running Docker Toolbox**
+
+Find the app on the Docker Machine IP. By default, this is `http://192.168.99.100:5000/` where the port is specified after the colon). The IP can be found with the command `docker-machine ip`.
 
 After the instance has started, then you can get a list of all running docker
 instances with the command:

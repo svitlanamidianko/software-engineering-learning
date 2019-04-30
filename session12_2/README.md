@@ -17,6 +17,10 @@ First work through the 6 part tutorial on docker.  For this session focus on
 sessions three, four, and five.  *For this course there is no need to run
 the parts of the tutorial which require multiple virtual machines.*
 
+**Reminder: On Windows**
+
+Docker Desktop for Windows requires Hyper-V, which is only supported for 64-bit Windows 10 Pro, Enterprise or Education. Windows 10 Home users, as well as users of 32-bit versions and older versions of Windows have to resort to a legacy solution, and use the outdated "Docker Toolbox". See [this link](https://docs.docker.com/toolbox/toolbox_install_windows/).
+
 ### 2. Build and tag the image
 Start by building a docker image using:
 ```bash
@@ -40,6 +44,10 @@ Once all the containers are running successfully then you should confirm that
 the Computation Server is indeed running at `http://localhost:5000`.  Enter a
 few example calculations (eg. `1.1 * 1.1` or `50 * 50`), and confirm that the
 results are successfully stored in the database.
+
+**Reminder: On Windows Running Docker Toolbox**
+
+Find the app on the Docker Machine IP. By default, this is `http://192.168.99.100:5000/` where the port is specified after the colon). The IP can be found with the command `docker-machine ip`.
 
 ### 5. Inspect all the running processes
 ```bash
@@ -87,6 +95,14 @@ particular commands / images).
 Now bring the stack up using:
 ```bash
 docker swarm init
+docker stack deploy -c docker-compose.yml cs162-swarm
+```
+
+**On Windows Running Docker Toolbox**
+
+You might need to specify an IP address to advertise. Use:
+```bash
+docker swarm init --advertise-addr 192.168.99.100
 docker stack deploy -c docker-compose.yml cs162-swarm
 ```
 
