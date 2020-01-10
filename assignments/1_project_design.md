@@ -22,14 +22,6 @@ This assignment requires a clear description of:
 
 You need to hand in a short pdf report (no more than 1000 words) in which you make as strong a case as possible for your project being the most worthwhile for this class to pursue.
 
-## Submission Information
-
-**Due:** Week 2, Wednesday
-
-**Length:** 1000
-
-**Weight:** x 4
-
 ## Focused Outcomes Added
 
-**[#cs162-agile](https://seminar.minerva.kgi.edu/app/outcome-index/cs162-agile?course_id=153)**: Follow the agile movement when researching and developing a new product. This involves finding short feedback loops throughout all stages of the product lifecycle (inception, development, and deployment).
+**#cs162-agile**: Follow the agile movement when researching and developing a new product. This involves finding short feedback loops throughout all stages of the product lifecycle (inception, development, and deployment).

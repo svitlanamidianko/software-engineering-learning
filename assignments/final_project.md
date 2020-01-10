@@ -52,17 +52,11 @@ least one other member of your team. There should be sufficient description in
 the pull request comments for one to understand the feature is that is being
 added.
 
-## Submission Information
-
-**Due:** Week 15, Friday
-
-**Weight:** x 8
-
 ## Focused Outcomes Added
 
-- **[#algorithms](https://seminar.minerva.kgi.edu/app/outcome-index/algorithms)**: Apply algorithmic thinking strategies to solve problems and effectively implement working code. (C) FA
-- **[#breakitdown](https://seminar.minerva.kgi.edu/app/outcome-index/breakitdown)**: Organize problems into tractable components and design solutions. (H) EA
-- **[#cs162-communication](https://seminar.minerva.kgi.edu/app/outcome-index/cs162-communication?course_id=153)**: Ensure that all code, documentation and commit messages are clearly written with explanations where appropriate.
-- **[#cs162-abstraction](https://seminar.minerva.kgi.edu/app/outcome-index/cs162-abstraction?course_id=153)**: Design interfaces (class interfaces, user interfaces, etc.) that are easy to use and hide much of the complexity needed for the implementation.
-- **[#cs162-separationofconcerns](https://seminar.minerva.kgi.edu/app/outcome-index/cs162-separationofconcerns?course_id=153)**: Design systems such that any task is handled by exactly one component and each component handles conceptually similar tasks.
-- **[#cs162-testing](https://seminar.minerva.kgi.edu/app/outcome-index/cs162-testing?course_id=153)**: Write comprehensive and meaningful testing code for the system.
+- **#algorithms**: Apply algorithmic thinking strategies to solve problems and effectively implement working code. (C) FA
+- **#breakitdown**: Organize problems into tractable components and design solutions. (H) EA
+- **#cs162-communication**: Ensure that all code, documentation and commit messages are clearly written with explanations where appropriate.
+- **#cs162-abstraction**: Design interfaces (class interfaces, user interfaces, etc.) that are easy to use and hide much of the complexity needed for the implementation.
+- **#cs162-separationofconcerns**: Design systems such that any task is handled by exactly one component and each component handles conceptually similar tasks.
+- **#cs162-testing**: Write comprehensive and meaningful testing code for the system.

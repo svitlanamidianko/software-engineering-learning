@@ -4,13 +4,15 @@ Flask is called a microframework because it is lightweight and minimalistic, pro
 
 ## Preclass
 
-Work through either 1, 2 or 3. Question 4 is optional.
-Finally, question 5 applies what you've learned to your assignment for
-this module and must be answered. You will be asked to paste in a portion of
-your Kanban server code in as a poll response, so please have this handy when
-you come to class.
+1. Work through one of option A, option B, or option C.
+2. Question 1 applies what you've learned to creating a kanban board. This must
+be answered. You will be asked to paste in a portion of your Kanban server code
+in as a poll response, so please have this handy when you come to class. Note
+that this preclass work forms the basis of assignment 2.
+3. Question 2 is optional, but will give you insight into some of the techniques
+used to create a more seamless user experience.
 
-### 1. Flaskr Microblogging Tutorial:
+### Option A. Flaskr Microblogging Tutorial:
 
 The official Flask tutorial covers setting up a simple microblogging
 application. Work through the application here:
@@ -20,7 +22,7 @@ If you want to compare your results with the final output, have a look here:
 https://github.com/pallets/flask/tree/master/examples/flaskr/
 
 
-### 2. A Basic Todo Application:
+### Option B. A Basic Todo Application:
 
 Follow the youtube video at: https://www.youtube.com/watch?v=4kD-GRF5VPs
 
@@ -37,7 +39,7 @@ assignment.
 
 (Optional) Find out how to use checkboxes to mark an item as complete.
 
-### 3. The Simplest Flask Application Ever:
+### Option C. The Simplest Flask Application Ever:
 
 Build a super-simple Flask application to your liking. Some ideas include:
 
@@ -59,7 +61,19 @@ Keep it short and simple!
 
 You should be able to visit your site at: http://127.0.0.1:5000/.
 
-### 4. (Optional) Building a JSON API in Flask
+### 1. Kanban server
+
+After working through a Flask example and watching the ToDo application being
+built, you should feel comfortable building your own Kanban application.
+
+Your Kanban application should be able to:
+1. Create a new item in the "To do" state.
+2. Move any item from any state ("To do", "Doing", or "Done") to any other state.
+3. Delete an item when it is done.
+4. Perform some basic styling using a CSS file.  (This is shown in step 8 of the
+   Flaskr tutorial)
+
+### 2. (Optional) Building a JSON API in Flask
 
 It is best practice to separate out your application data from the presentation
 of the data.  Taken to its logical conclusion this leads to a clean separation
@@ -76,15 +90,3 @@ Typically this is done in the webpage using JavaScript (or a JavaScript
 framework).  There isn't enough time in this course to adequately cover
 JavaScript, but if you already know some, or are willing to put the effort into
 learning it, then please do so for this unit and/or the final project!
-
-### 5. Kanban server
-
-After working through a Flask example and watching the ToDo application being
-built, you should feel comfortable building your own Kanban application.
-
-Your Kanban application should be able to:
-1. Create a new item in the "To do" state.
-2. Move any item from any state ("To do", "Doing", or "Done") to any other state.
-3. Delete an item when it is done.
-4. Perform some basic styling using a CSS file.  (This is shown in step 8 of the
-   Flaskr tutorial)

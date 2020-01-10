@@ -70,13 +70,7 @@ requests where you have used similar techniques and technology as is asked for
 in the above assignment. As always your code should include a significant
 amount of unit tests and be well documented.
 
-## Submission Information
-
-**Due:** Week 12, Friday
-
-**Weight:** x 5
-
 ## Focused Outcomes Added
 
-- **[#cs162-communication](https://seminar.minerva.kgi.edu/app/outcome-index/cs162-communication?course_id=153)**: Ensure that all code, documentation and commit messages are clearly written with explanations where appropriate.
-- **[#cs162-sql](https://seminar.minerva.kgi.edu/app/outcome-index/cs162-sql?course_id=153)**: Write fast queries for well-designed SQL tables.
+- **#cs162-communication**: Ensure that all code, documentation and commit messages are clearly written with explanations where appropriate.
+- **#cs162-sql**: Write fast queries for well-designed SQL tables.
