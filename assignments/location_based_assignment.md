@@ -30,14 +30,7 @@ there is regular and consistent feedback to guide the final project.
  - Submit a pdf clearly detailing all the questions you posed to the user, all the answers that the user gave, and highlight how talking to the user helped improve the system, or where you were able to correct small miscommunications from previous interviews.
  - Your pdf must also be shared with the rest of the group as soon as it’s been written up to ensure that everyone knows and understands the user feedback.
 
-## Submission Information
-
-**Due:** by Week 14, Friday
-
-**Weight:** x 2
-
 ## Focused Outcomes Added
 
-- **[#cs162-communication](https://seminar.minerva.kgi.edu/app/outcome-index/cs162-communication?course_id=153)**: Ensure that all code, documentation and commit messages are clearly written with explanations where appropriate.
-- **[#cs162-agile](https://seminar.minerva.kgi.edu/app/outcome-index/cs162-agile?course_id=153)**: Follow the agile movement when researching and developing a new product. This involves finding short feedback loops throughout all stages of the product lifecycle (inception, development, and deployment).
-
+- **#cs162-communication**: Ensure that all code, documentation and commit messages are clearly written with explanations where appropriate.
+- **#cs162-agile**: Follow the agile movement when researching and developing a new product. This involves finding short feedback loops throughout all stages of the product lifecycle (inception, development, and deployment).
