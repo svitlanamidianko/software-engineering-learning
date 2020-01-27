@@ -19,4 +19,7 @@ def problem_choice(email, seminar, problems):
 if __name__ == '__main__':
     email = input('Please enter your student email address: ')
     sessions_key = input('What session is this for (sessions supported: {}): '.format(', '.join([*sessions])))
+    if sessions_key not in sessions.keys():
+        print("Oops, I don't think we support that session number, would you mind checking you typed it write? You wrote {}.".format(sessions_key))
+        sessions_key = input('What session is this for (sessions supported: {}): '.format(', '.join([*sessions])))
     print(problem_choice(email, sessions_key, sessions[sessions_key]))
