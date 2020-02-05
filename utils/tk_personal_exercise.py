@@ -1,20 +1,18 @@
 from tkinter import *
-import sys
-import hashlib
 
 class popupWindow(object):
     def __init__(self,master):
         self.master = master
         top = self.top = Toplevel(master)
-        self.l1 = Label(top,text="Please enter your student email address:")
+        self.l1 = Label(top, text="Please enter your student email address:")
         self.l1.pack()
         self.e1 = Entry(top)
         self.e1.pack()
-        self.l2 = Label(top,text="Which Session is this for?")
+        self.l2 = Label(top, text="Which Session is this for?")
         self.l2.pack()
         self.e2 = Entry(top)
         self.e2.pack()
-        self.b = Button(top,text='Submit',command=self.cleanup)
+        self.b = Button(top, text='Submit',command=self.cleanup)
         self.b.pack()
         self.top.attributes("-topmost", True)
 
@@ -53,24 +51,7 @@ class mainWindow(object):
             self.reopen_popup.pack()
         '''
 
-    def problem_choice(self, email, session_key):
-        sessions = {'3.2': ['2-Logging', 
-                            '3-Graphics'], 
-                    '6.1': ['2-The Current Weather', 
-                            '3-Crypto Exchange', 
-                            '4-Google directions', 
-                            '5-Flying Aircraft']}
-        email = email.strip().lower()
-        if "@minerva.kgi.edu" not in email:
-            raise AttributeError('Not Minerva Email Address')
-        seminar = session_key.strip().lower()
-        enc = (email + seminar).encode()
-        md5 = hashlib.md5(enc).hexdigest()
-        ind = int(md5, 16) % len(sessions[session_key])
-        return sessions[session_key][ind]
 
-
-if __name__ == "__main__":
-    root=Tk()
-    m=mainWindow(root)
-    root.mainloop()
+root=Tk()
+m=mainWindow(root)
+root.mainloop()
