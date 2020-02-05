@@ -2,7 +2,7 @@ import hashlib
 
 sessions = {'3.2': ['2-Logging', 
                     '3-Graphics'], 
-            '9.1': ['2-The Current Weather', 
+            '6.1': ['2-The Current Weather', 
                     '3-Crypto Exchange', 
                     '4-Google directions', 
                     '5-Flying Aircraft']}
