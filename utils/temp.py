@@ -1,47 +1,105 @@
 import hashlib
 from tkinter import *
 
-class SessionAssignment:
+class AbstractMethod:
     def __init__(self):
         self.sessions = {'3.2': ['2 - Logging', 
                                  '3 - Graphics'], 
-                        '6.1': ['2 - The Current Weather', 
-                                '3 - Crypto Exchange', 
-                                '4 - Google directions', 
-                                '5 - Flying Aircraft']}
-        self.interfaces = {'Terminal' : self.Terminal, 
-                           'TKinter' : self.TKinter}
+                         '6.1': ['2 - The Current Weather', 
+                                 '3 - Crypto Exchange', 
+                                 '4 - Google directions', 
+                                 '5 - Flying Aircraft']}
+        self.user_email = ''
+        self.sessions_key = ''
+        self.sessions_value = ''
     
+    def user_input(self):
+        '''
+        Method for gathering both user email and session user is querying.
+        '''
+        pass
+
     def problem_choice(self, sessions_key, email):
-        email = email.strip().lower()
-        sessions_key = sessions_key.strip().lower()
+        '''
+        Method for determining the session given the student's email. This is standard throughout
+        all implementations so useful to implement in abstract class.
+        '''
+        email = self.user_email.strip().lower() #xtra careful
+        sessions_key = self.sessions_key.strip().lower() #xtra careful
         enc = (email + sessions_key).encode()
         md5 = hashlib.md5(enc).hexdigest()
         ind = int(md5, 16) % len(self.sessions[sessions_key])
-        return self.sessions[sessions_key][ind]
+        self.sessions_value = self.sessions[sessions_key][ind]
     
-    def Main(self):
-        ui_type = input("What interface would you like? I can currently do: {}: ".format(', '.join([*self.interfaces])))
-        return self.interfaces[ui_type]()
+    def user_output(self):
+        '''
+        Method for conveying session assignment to the user.
+        '''
+        pass
 
-    def Terminal(self):
-        sessions_key = input("What session is this for (sessions supported: {}): ".format(", ".join([*self.sessions])))
-        while sessions_key not in self.sessions.keys():
-            print("Oops, I don't think we support that session number, would you mind checking you typed it write? You wrote {}.".format(sessions_key))
-            sessions_key = input("What session is this for (sessions supported: {}): ".format(", ".join([*self.sessions])))
+class Terminal(AbstractMethod):
+    def __init__(self):
+        super().__init__()
+    
+    def user_input(self):
+        self.user_email = input("Please enter your student email address: ")
+        while "@minerva.kgi.edu" not in self.user_email:
+            print("Oops, I don't think that's a Minervan email address, would you mind checking you typed it write? You wrote {}.".format(self.user_email))
+            self.user_email = input("Please enter your student email address: ")
         
-        email = input("Please enter your student email address: ")
-        while "@minerva.kgi.edu" not in email:
-            print("Oops, I don't think that's a Minervan email address, would you mind checking you typed it write? You wrote {}.".format(email))
-            email = input("Please enter your student email address: ")
-        
-        print("You'll be doing {}.".format(self.problem_choice(sessions_key, email)))
+        self.sessions_key = input("What session is this for (sessions supported: {}): ".format(", ".join([*self.sessions])))
+        while self.sessions_key not in self.sessions.keys():
+            print("Oops, I don't think we support that session number, would you mind checking you typed it write? You wrote {}.".format(self.sessions_key))
+            self.sessions_key = input("What session is this for (sessions supported: {}): ".format(", ".join([*self.sessions])))
+    
+    def user_output(self):
+        print("You'll be doing: {}.".format(self.problem_choice()))
 
-    def TKinter(self):
+class TKinter(AbstractMethod):
+    def __init__(self, master):
+        super().__init__()
+        self.root = master
+
+    def user_input(self):
+        top = Toplevel(self.root)
+        label_user_email = Label(top, text="Please enter your student email address:")
+        label_user_email.pack()
+        entry_user_email = Entry(top)
+        entry_user_email.pack()
+        label_sessions_key = Label(top, text="Which Session is this for?")
+        label_sessions_key.pack()
+        entry_sessions_key = Entry(top)
+        entry_sessions_key.pack()
+
+        def checker():
+            self.user_email = entry_user_email.get()
+            self.sessions_key = entry_sessions_key.get()
+            if "@minerva.kgi.edu" in self.user_email and self.sessions_key in [*self.sessions]:
+                top.destroy()
+            else:
+                if "@minerva.kgi.edu" in self.user_email:
+                    label_warning = Label(top, text="It looks like you may not have entered a session we currently support!\n Would you mind retyping? As a reminder, you wrote {}.\n We currently only support ({})".format(self.sessions_key, ", ".join([*self.sessions])))
+                else:
+                    label_warning = Label(top, text="Would you mind checking you entered a minerva address?\n As a reminder, you wrote {}.".format(self.user_email))
+                
+                label_warning.pack()
+
+                if hasattr(self.root, 'label_warning'):
+                    self.user_input()
+
+        b = Button(top, text='Submit', command=checker)
+        b.pack()
+        top.attributes("-topmost", True)
+
+    def user_output(self):
         pass
 
 if __name__ == '__main__':
-    SessionAssignment = SessionAssignment()
-    SessionAssignment.Main()
+    root = Tk()
+    t = TKinter(root)
+    t.user_input()
+    print(t.problem_choice())
+    t.user_output()
+    root.mainloop()
 
 
