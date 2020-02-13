@@ -19,6 +19,7 @@ beforehand with a few questions around:
  - identifying when the user would use your system
  - the typical tasks that a user expects to be able to accomplish with your system
  - the user flows that a user expects for each task
+
 _It will be in your best interest to coordinate amongst your team and ensure that
 these user interviews occur periodically throughout the semester to ensure that
 there is regular and consistent feedback to guide the final project._
