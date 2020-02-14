@@ -45,8 +45,9 @@ which is then read into a python list of python dictionaries:
 ```
 
 ## Questions
-Everyone must complete question 1, and then find out which remaining question
-they need to answer using the following python code:
+
+**Everyone must complete question 1, and then find out which remaining question
+they need to answer using the following python code:**
 
 Terminal
 ```bash

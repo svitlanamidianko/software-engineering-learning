@@ -1,16 +1,21 @@
 '''
 Write your own version of Filelog here!
 
-The Filelog Class opens up a file and add log within. The
-previous log, if any, should not be removed. Also, there
+The Filelog Class opens up a file and adds log messages within.
+Previous log messages, if any, should not be removed. Also, there
 can be only one Filelog object at any time of this
-program - that is, a second Filelog object will lead to
-exact the same instance in the memory as the first one. 
+program - that is, creating a second Filelog object should return
+the exact same instance as the first one. (See testing code below.)
 
 At least three methods are required:
 info(msg), warning(msg), and error(msg).
 '''
-#class FileLog():
+
+
+class FileLog():
+    # TODO: implement a singleton logging class!!
+    pass
+
 
 '''
 The following function serves as a simple test to check
@@ -18,13 +23,28 @@ whether the id of multiple instances of Filelog remain
 the same.
 '''
 
-def FileLogTest(filelogInstance = None):
-    if filelogInstance == None:
-        raise ValueError('Filelog Instance doesn\'t exist')
 
-    log = filelogInstance()
-    log.warning('One CS162 Filelog instance found with id ' + str(id(log)))
-    log2 = filelogInstance()
-    log2.warning('Another CS162 Filelog instance Found with id ' + str(id(log2)))
+def file_log_test():
+    log = FileLog()
+    log.info(f'One CS162 Filelog instance found with id {id(log)}')
+    log2 = FileLog()
+    log2.info(f'Another CS162 Filelog instance Found with id {id(log2)}.')
+    if id(log) != id(log2):
+        log.error('The singleton implementation is buggy!')
+    else:
+        log.info('The singleton implementation works!')
 
-#FileLogTest(filelogInstance = FileLog)
+
+if __name__ == '__main__':
+    '''
+    STANDALONE TESTING:
+    -------------------
+    If you want to test this logging implementation separately. (ie. not relying
+    on any other libraries) then you can run the following:
+
+        $ python3 log.py
+
+    This will run the file_log_test() code, which will verify whether or not
+    you have a successful singleton implementation.
+    '''
+    file_log_test()
