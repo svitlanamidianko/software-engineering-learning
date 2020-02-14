@@ -7,13 +7,15 @@ answered by everyone, but only one of questions 2 and 3 need to be answered.
 
 Find out which question to answer by running
 the following:
+
+Terminal
 ```bash
-$ python3 utils/personal_exercises.py
+python3 utils/pcw_selector.py Terminal
 ```
 
-Or try out the tkinter interface:
+TKinter
 ```bash
-$ python3 tk_personal_exercise.py
+python3 utils/pcw_selector.py TKinter
 ```
 
 Once you've entered your email address, you will find out whether to answer

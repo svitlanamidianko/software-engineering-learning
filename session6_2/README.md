@@ -45,15 +45,18 @@ which is then read into a python list of python dictionaries:
 ```
 
 ## Questions
+
 **Everyone must complete question 1, and then find out which remaining question
 they need to answer using the following python code:**
+
+Terminal
 ```bash
-$ python3 utils/personal_exercises.py
+python3 utils/pcw_selector.py Terminal
 ```
 
-Or try out the tkinter interface:
+TKinter
 ```bash
-$ python3 tk_personal_exercise.py
+python3 utils/pcw_selector.py TKinter
 ```
 
 **Be sure to bring both your HTML form, and your (single) python program to class,
