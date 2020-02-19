@@ -6,7 +6,7 @@ class BaseMethod:
     def __init__(self):
         self.sessions = {'3.2': ['2 - Logging', 
                                  '3 - Graphics'], 
-                         '6.2': ['2 - The Current Weather', 
+                         '6.2': ['2 - Pokemon', 
                                  '3 - Crypto Exchange', 
                                  '4 - Google directions', 
                                  '5 - Flying Aircraft']}
