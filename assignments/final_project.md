@@ -1,4 +1,6 @@
 # Final project:
+## Description
+
 The final project for CS162 will consist of the entire section implementing a
 project chosen from the suggestions given in assignment 1. Your instructor will
 provide more specific details of the project.
@@ -49,3 +51,12 @@ pull request. Each pull request should have been successfully reviewed by at
 least one other member of your team. There should be sufficient description in
 the pull request comments for one to understand the feature is that is being
 added.
+
+## Focused Outcomes Added
+
+- **#algorithms**: Apply algorithmic thinking strategies to solve problems and effectively implement working code. (C) FA
+- **#breakitdown**: Organize problems into tractable components and design solutions. (H) EA
+- **#cs162-communication**: Ensure that all code, documentation and commit messages are clearly written with explanations where appropriate.
+- **#cs162-abstraction**: Design interfaces (class interfaces, user interfaces, etc.) that are easy to use and hide much of the complexity needed for the implementation.
+- **#cs162-separationofconcerns**: Design systems such that any task is handled by exactly one component and each component handles conceptually similar tasks.
+- **#cs162-testing**: Write comprehensive and meaningful testing code for the system.

@@ -45,15 +45,18 @@ which is then read into a python list of python dictionaries:
 ```
 
 ## Questions
-Everyone must complete question 1, and then find out which remaining question
-they need to answer using the following python code:
+
+**Everyone must complete question 1, and then find out which remaining question
+they need to answer using the following python code:**
+
+Terminal
 ```bash
-$ python3 utils/personal_exercises.py
+python3 utils/pcw_selector.py Terminal
 ```
 
-Or try out the tkinter interface:
+TKinter
 ```bash
-$ python3 tk_personal_exercise.py
+python3 utils/pcw_selector.py TKinter
 ```
 
 **Be sure to bring both your HTML form, and your (single) python program to class,
@@ -96,21 +99,23 @@ BTC_ETC : 0.00296001
 ```
 https://poloniex.com/support/api/
 
-### 4. Google directions
+### 4. What3words
 
-Here is an example link to return travel information in JSON format:
-http://maps.googleapis.com/maps/api/directions/json?origin=Chicago,IL&destination=Los+Angeles,CA
+Here is an example link to convert a latitude and longitude to a 3 word address in JSON format:
+https://api.what3words.com/v3/convert-to-3wa?key=MY-API-KEY&coordinates=51.521251%2C-0.203586&language=en&format=json
 
-Write a short Python program which queries the Google Maps API and then
-prints out the distance and time it will take for the journey:
+Create a free developer account [here](https://accounts.what3words.com/login?redirection=/create-api-key) and choose an interesting location.
+
+Write a short Python program which queries the what3words API and then
+prints out the nearest place and 3 word address in this format:
 
 ```text
-Traveling from: Chicago, IL, USA
-Traveling to:   Los Angeles, CA, USA
-Distance:       2,015 mi
-Duration:       1 day 5 hours
+Latitude: 51.521251
+Longitude:   -0.203586
+Nearest Place:       Bayswater, London
+3 word address:       filled.count.soap
 ```
-More documentation of the fields can be found [here](https://developers.google.com/maps/documentation/directions/start).
+More documentation can be found [here](https://developer.what3words.com/public-api/docs#convert-to-3wa).
 
 ### 5. Flying Aircraft
 

@@ -3,7 +3,7 @@
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE Product (
-    ProductID INT PRIMARY KEY,
+    ProductID INTEGER PRIMARY KEY,
     Title TEXT,
     Description TEXT,
     Price NUMERIC(11, 2),
@@ -11,23 +11,23 @@ CREATE TABLE Product (
 );
 
 CREATE TABLE Orders (
-    OrderID INT PRIMARY KEY,
-    CustomerID INT,
+    OrderID INTEGER PRIMARY KEY,
+    CustomerID INTEGER,
     DateOrdered DATETIME,
-    MonthOrdered INT,
+    MonthOrdered INTEGER,
     FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 );
 
 CREATE TABLE OrderItems (
-    OrderID INT,
-    ProductID INT,
-    Quantity INT,
+    OrderID INTEGER,
+    ProductID INTEGER,
+    Quantity INTEGER,
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
     FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 );
 
 CREATE TABLE Warehouse (
-    WarehouseID INT PRIMARY KEY,
+    WarehouseID INTEGER PRIMARY KEY,
     Name TEXT,
     AddressLine1 TEXT,
     AddressLine2 TEXT,
@@ -35,16 +35,16 @@ CREATE TABLE Warehouse (
 );
 
 CREATE TABLE Inventory (
-    WarehouseID INT,
-    ProductID INT,
-    Quantity INT,
+    WarehouseID INTEGER,
+    ProductID INTEGER,
+    Quantity INTEGER,
     FOREIGN KEY (WarehouseID) REFERENCES Warehouse(WarehouseID),
     FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 );
 
 CREATE TABLE Supplier (
-    SupplierID INT,
-    Name TeXT,
+    SupplierID INTEGER PRIMARY KEY,
+    Name TEXT,
     AddressLine1 TEXT,
     AddressLine2 TEXT,
     AddressLine3 TEXT,
@@ -52,29 +52,29 @@ CREATE TABLE Supplier (
     Email TEXT
 );
 CREATE TABLE SupplierProduct(
-    SupplierID INT,
-    ProductID INT,
-    DaysLeadTime INT,
+    SupplierID INTEGER,
+    ProductID INTEGER,
+    DaysLeadTime INTEGER,
     Cost NUMERIC(11, 2),
     FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID),
     FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 );
 
 CREATE TABLE SupplierOrders(
-    SupplierOrderID INT,
-    SupplierID INT,
-    ProductID INT,
-    WarehouseID INT,
-    Quantity INT,
+    SupplierOrderID INTEGER PRIMARY KEY,
+    SupplierID INTEGER,
+    ProductID INTEGER,
+    WarehouseID INTEGER,
+    Quantity INTEGER,
     Status TEXT,
     DateOrdered DATE,
     DateDue DATE,
     FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID),
     FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
-    FOREIGN KEY (WarehouseID) REFERENCES Warehouse(WarehouseID),
+    FOREIGN KEY (WarehouseID) REFERENCES Warehouse(WarehouseID)
 );
 CREATE TABLE Customer (
-    CustomerID INT,
+    CustomerID INTEGER PRIMARY KEY,
     FirstName TEXT,
     Surname TEXT,
     AddressLine1 TEXT,
@@ -111,4 +111,4 @@ INSERT INTO SupplierOrders VALUES (6001, 5001, 3001, 4001, 99, "ORDERED", "2025-
 INSERT INTO SupplierOrders VALUES (6002, 5001, 3001, 4002, 99, "DELIVERED", "2025-01-16", "2025-01-23");
 
 INSERT INTO Customer VALUES (2000, "Gertrud", "Karr", "1709 Woodridge Lane", "Memphis", "TN 38110", "559-309-6624", "gkarr@dayrep.com");
-INSERT INTO Customer VALUES (2000, "Clara", "Tang", "500 Retreat Avenue", "York", "ME 03909", "312-367-6954", "clara_tang@armyspy.com");
+INSERT INTO Customer VALUES (2001, "Clara", "Tang", "500 Retreat Avenue", "York", "ME 03909", "312-367-6954", "clara_tang@armyspy.com");

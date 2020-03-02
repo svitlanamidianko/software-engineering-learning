@@ -1,6 +1,6 @@
 ## SQL
 For the unit on SQL we will be focusing on SQLite.  This is a small
-relational database which saves all all tables from a single database
+relational database which saves all tables from a single database
 into a single file.
 
 For the first few sessions, it is recommended that you run sqlite3 directly

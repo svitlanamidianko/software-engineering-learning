@@ -44,7 +44,7 @@ import sqlalchemy
 
 ```python
 from sqlalchemy import create_engine 
-engine = create_engine('sqlite:///:memory:', echo = TRUE)
+engine = create_engine('sqlite:///:memory:', echo = True)
 ```
  
 What's happening with the `create_engine()` function?
@@ -92,12 +92,12 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, sessionmaker 
 
 class User(Base):
-	__table__ = 'users'
+	__tablename__ = 'users'
 	id = Column(Integer, primary_key = True)
 	name = Column(String)
 	insurance_id = Column(Integer)
 
-	def __repr__():
+	def __repr__(self):
 		return "<User(id={0}, name={1}, insurance_id={2})>".format(self.id, self.name, self.insurance_id)
 ```
 
@@ -105,8 +105,8 @@ Let's create another table to display foreign relationships.
 
 ```python
 class Insurance(Base):
-	__table__ = 'insurance'
-	id = Column(Integer, primary_key = True, ForeignKey('users.insurance_id'))
+	__tablename__ = 'insurance'
+	id = Column(Integer, ForeignKey('users.insurance_id'), primary_key = True)
 	claim_id = Column(Integer)
 	users = relationship(User)
 ```
@@ -124,14 +124,6 @@ Base.metadata.create_all(engine)
 This is very important, as without calling `create_all(engine)` and binding it to the engine, the schema will not be initialised. Your table should now be created, and you will be able to add elements to it. 
 
 ## Adding Elements to the SQLAlchemy 
-
-In the same file, call the imports with: 
-
-```python
-from sqlalchemy.orm import sessionmaker 
-
-from sqlalchemy_declarative import Base, User
-```
 
 Create an instance of your `User` class with: 
 
@@ -173,15 +165,10 @@ Great!
 Reflecting a table simply means being able to read its metadata, and being able to use SQLAlchemy to read the contents of the table. 
 
 ```python
-from sqlalchemy import Table
+from sqlalchemy import Table, MetaData
+metadata = MetaData()
+users = Table('users', metadata, autoload=True, autoload_with=engine)
 ```
-
-`Table` is the name of the table you are referencing. Make sure that you are connected to the same engine that has the table you are aiming to reflect.
-
-### Reflect table from the engine: Table
-
-`users = Table('users', metadata, autoload=True, autoload_with=engine)`
-
 Load the table `users` that you initialised before with the above function.
 
 The `autoload_with=engine` parameter ensures that it's connecting to the right engine interface.

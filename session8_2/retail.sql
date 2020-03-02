@@ -3,22 +3,22 @@
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE Product (
-    ProductID INT,
+    ProductID INTEGER,
     Title TEXT,
     Description TEXT,
     Price NUMERIC(11, 2),
     Cost NUMERIC(11, 2)
 );
 CREATE TABLE Orders (
-    OrderID INT,
-    CustomerID INT,
+    OrderID INTEGER,
+    CustomerID INTEGER,
     DateOrdered DATETIME,
     MonthOrdered INT
 );
 CREATE TABLE OrderItems (
-    OrderID INT,
-    ProductID INT,
-    Quantity INT,
+    OrderID INTEGER,
+    ProductID INTEGER,
+    Quantity INTEGER,
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
     FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
 );
