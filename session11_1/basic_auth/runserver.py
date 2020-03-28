@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from flask import Flask, jsonify, render_template
-from requires_authorization import requires_authorization
+from .requires_authorization import requires_authorization
 
 app = Flask(__name__)
 
