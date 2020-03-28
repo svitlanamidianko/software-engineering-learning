@@ -13,10 +13,16 @@ vulnerabilities.
 A good introduction to basic authentication can be found at:
 https://www.httpwatch.com/httpgallery/authentication/
 
-You are also encouraged to explore the code contained in the current directory.
+You are also encouraged to explore the code contained in the `basic_auth`
+directory, and you can run the server using the following commands:
 ```bash
-python3 runserver.py
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+export FLASK_APP=basic_auth
+flask run
 ```
+Now vist `http://127.0.0.1:5000/`.
 
 Notice how the first request generates a 401 response, and your browser will
 automatically show a username and password dialog box.  This username and
@@ -87,14 +93,14 @@ explain how and why your attack will work.
 
 You must be able to paste any part of your code into a poll response.
 
-### 1. Try an SQL Injection Hack 
+### 1. Try an SQL Injection Hack
 
 It's time to give SQL Injection a shot using the `'' OR ''=''` SQL trick (which always returns True). Here's a hack to try at https://sqlzoo.net/hack/ to see if you can successfully gain access to a user's account.
 
-1. Log in to the forum as "Jake" by passing "xxx" into the username and an SQL injection into the password. 
-2. (Optional) Acquire a user's password and then log into the main forum. Post something there as the user. 
+1. Log in to the forum as "Jake" by passing "xxx" into the username and an SQL injection into the password.
+2. (Optional) Acquire a user's password and then log into the main forum. Post something there as the user.
 
-Walk through each of the tutorials to try to gain access to a user's account, then post something on the forum if you are able to! 
+Walk through each of the tutorials to try to gain access to a user's account, then post something on the forum if you are able to!
 
 ### 2. Write an SQL injection
 Assume the following tables exist:
