@@ -1,6 +1,6 @@
 # This simple app performs simple calculations and stores the results in an
-# postgres database.  When someone visits the home page they can see the 10
-# most recent calculations.
+# sqlite3 database.  When someone visits the home page they can see the 10 most
+# recent calculations.
 
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -8,7 +8,8 @@ from parse import Parser
 from datetime import datetime
 
 app = Flask(__name__)
-URI = 'postgresql://cs162_user:cs162_password@db/cs162'
+
+URI = 'sqlite://'
 app.config['SQLALCHEMY_DATABASE_URI'] = URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
