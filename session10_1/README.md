@@ -14,9 +14,7 @@ able to satisfy many simultaneous queries coming from many machines.
 
 Why don't we just use SQLite3 in Python (as seen in `SQLite3Sample.py`)?
 
-Using an ORM like SQLAlchemy allows code to be deployed across multiple database engines. Using a native relational database language like SQLite (not an abstraction layer like SQLAlchemy) works for local machines where file-based databases still work, but in cases where the same database may need to be accessed simultaneously from many computers over a network, this presents issues with latency and file corruption if the same part of the underlying database is modified at the same time. 
-
-The other convenient thing about SQLAlchemy is that the underlying database it's connected to -- whether SQLite3 or MySQL or Postgres -- can be changed quite painlessly, as opposed to rewriting each command (the engine interface that SQLAlchemy is connected to will just need to change). 
+Using an ORM like SQLAlchemy allows code to be used unchanged when connecting to different databases. This might allow us to use different databases in different contexts. Maybe we want fast unittests to run against a simple and small sqlite database, however we want to run a hefty server running Postgres in production.  All that will need to be changed is the connection string (which can even be set in an environment variable).
 
 For comparisons with an SQLite3 implementation in Python, compare `SQLAlchemySample.py` and `SQLite3Sample.py`. Check out this [link](http://www.sqlite.org/whentouse.html) to read more about when SQLite works well and when it doesn't.
 
