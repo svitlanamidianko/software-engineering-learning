@@ -46,8 +46,8 @@ In a `README.md` file you must include a series of commands to execute all the
 relevant parts of your code:
 
 ```python3
-python3.6 -m venv .venv
-source .venv/bin/activate
+python3.6 -m venv venv
+source venv/bin/activate
 pip3 install -r requirements.txt
 python3 create.py
 python3 insert_data.py
