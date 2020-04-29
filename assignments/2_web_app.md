@@ -37,11 +37,15 @@ code and html, a requirements.txt file, and a `README.md` file. To get your
 application to run should only require the following steps:
 
 ```python3
-python3.6 -m venv .venv
-source .venv/bin/activate
+python3.6 -m venv venv
+source venv/bin/activate
 pip3 install -r requirements.txt
 python3 app.py
 ```
+
+Please make sure that the virtual environment `venv` is **not** included in 
+the zip file. (Virtual environments are not portable, and if you installed it 
+on your laptop then it is unlikely to work anywhere else.)
 
 ### Testing:
 The project must also include appropriate unit tests. These unit tests should be
@@ -55,12 +59,5 @@ python3 -m unittest discover test
 If your contribution to the final project has involved a significant aspect of
 web programming then you can submit a pdf containing links to pull requests
 where you have used similar techniques and technology as is asked for in the
-above assignment. As always your code should include a significant amount of
+above assignment. Where possible your code should include a significant amount of
 unit tests and be well documented.
-
-## Focused Outcomes Added
-
-- **#cs162-communication**: Ensure that all code, documentation and commit messages are clearly written with explanations where appropriate.
-- **#cs162-separationofconcerns**: Design systems such that any task is handled by exactly one component and each component handles conceptually similar tasks.
-- **#cs162-testing**: Write comprehensive and meaningful testing code for the system.
-- **#cs162-webstandards**: Build systems that correctly use the standard web technologies (e.g. http, html)
