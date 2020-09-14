@@ -46,13 +46,18 @@ In a `README.md` file you must include a series of commands to execute all the
 relevant parts of your code:
 
 ```python3
-python3.6 -m venv .venv
-source .venv/bin/activate
+python3.6 -m venv venv
+source venv/bin/activate
 pip3 install -r requirements.txt
 python3 create.py
 python3 insert_data.py
 python3 query_data.py
 ```
+
+Please make sure that the virtual environment `venv` is **not** included in 
+the zip file. (Virtual environments are not portable, and if you installed it 
+on your laptop then it is unlikely to work anywhere else.)
+
 #### Execution (SQLite):
 In a `README.md` file you must include a series of commands to read the various
 files your have submitted. For example:
@@ -69,8 +74,3 @@ database programming then you can submit a pdf containing links to pull
 requests where you have used similar techniques and technology as is asked for
 in the above assignment. As always your code should include a significant
 amount of unit tests and be well documented.
-
-## Focused Outcomes Added
-
-- **#cs162-communication**: Ensure that all code, documentation and commit messages are clearly written with explanations where appropriate.
-- **#cs162-sql**: Write fast queries for well-designed SQL tables.

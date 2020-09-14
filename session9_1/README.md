@@ -117,7 +117,7 @@ statements may help in creating the summary tables.
 2. Write the `CREATE TABLE` statements to implement your design.
 3. `INSERT` some example data that you have made up.
 4. Now write a transaction that updates the portfolios for both the selling
-company and the buying company.  This must also then update the summary tables.
+company and the buying company.
 5. What would happen if the statements were not wrapped in a transaction, and
 everything went smoothly?  What would happen if the set of updates were
 interrupted halfway through?

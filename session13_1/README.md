@@ -9,7 +9,7 @@ First we will do this manually, and once this is working we will do this using
 costs and benefits of each approach.
 
 Again, all of these commands are typed into a shell which has changed to the
-`session12_2/web` directory.  There are differences between the the two
+`session13_1/web` directory.  There are differences between the the two
 directories.  Make sure to find out what has changed, and why!
 
 ### 1. Do the tutorial
