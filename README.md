@@ -8,24 +8,31 @@ Some of these directories will not align with the most recent version of the syl
 
 
 
-Editors:
- - Atom (https://atom.io/)
- - Sublime Text (https://www.sublimetext.com/)
- - VS Code (https://code.visualstudio.com/) (not Visual Studio itself!)
- - PyCharm (https://www.jetbrains.com/pycharm/)
+## Editors:
+It is strongly recommended that you use one of the following editors:
+ - [Atom](https://atom.io/)
+ - [Sublime Text](https://www.sublimetext.com/)
+ - [VS Code](https://code.visualstudio.com/) (not Visual Studio itself!)
+ - [PyCharm](https://www.jetbrains.com/pycharm/)
+This list is not exhaustive, and there are a lot of good editors out there (see also Emacs and Vim if you want to be old school).
+However it is essential that your code editor is powerful. It should be possible to install plugins which perform particular functionality (eg. make git easier to use, autoformat your code on save, have multiple cursors simultaneously).
 
-Your missing semester:
-https://missing.csail.mit.edu/
+The [FAQ](faq.md) provides links to short guides on how to install some of the editors and configure them as proper python development environments.
 
-Code related:
-yapf  -https://github.com/google/yapf
-This is a great package because it standardizes how all your python code should be.
-If you don't like how yapf has formatted the code, then you can take a deep breath
+
+## Code related:
+
+### Autoformatting
+Please use [black](https://pypi.org/project/black/) to automatically format your code. If everyone uses automatic code formatting then it will save everyone a lot of time when working together. It's the worst when you pull someone else's code, change a single line, hit save, and hundreds of lines of changes occur.
+
+If you don't like how black has formatted the code, then you can take a deep breath
 and think about how standardization is important, and how it helps to avoid
 endless debates about how to best layout code. Then you can move on to writing other
-code with the time that you have saved.
+code with the time that you have saved avoiding those debates.
 
-Protip: Most code editors will have a yapf plugin which will automatically reformat the
-code every time you save the file! Try to make sure everyone on your team does this!
-
-https://www.hackreactor.com/blog/laurie-voss-cto-of-npm-gives-engineering-fundamentals-talk
+## Miscellaneous tips:
+ - [Your missing semester](https://missing.csail.mit.edu/):
+This is a great resource to provide some high level guidance on better using a wide range of tools. For example, shell scripts, command line tools, git, debugging, and profiling. 
+ - [Stuff Everyone Knows Except You](https://www.hackreactor.com/blog/laurie-voss-cto-of-npm-gives-engineering-fundamentals-talk): 
+This is a great talk covering a wide range of topics. It packs in loads of technical tips and life advice. 
+ - See also the [FAQ](faq.md) for more info!
