@@ -37,9 +37,3 @@ Another way to work with Git is through the Git Desktop application, which you c
 ## Miscellaneous
 
 [A Guide to Linux Bash Shell on Windows 10](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/)
-
-YAPF is a Python formatter developed by Google. In essence, the algorithm takes the code and reformats it to the best formatting that conforms to the style guide, even if the original code didn’t violate the style guide.
-
-- Install it for [PyCharm](https://plugins.jetbrains.com/plugin/9705-yapf-pycharm)
-- Install it for [Sublime](https://github.com/jason-kane/PyYapf)
-- Install it for [Atom](https://atom.io/packages/python-yapf)
