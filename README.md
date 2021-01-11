@@ -14,10 +14,11 @@ It is strongly recommended that you use one of the following editors:
  - [Sublime Text](https://www.sublimetext.com/)
  - [VS Code](https://code.visualstudio.com/) (not Visual Studio itself!)
  - [PyCharm](https://www.jetbrains.com/pycharm/)
+
 This list is not exhaustive, and there are a lot of good editors out there (see also Emacs and Vim if you want to be old school).
 However it is essential that your code editor is powerful. It should be possible to install plugins which perform particular functionality (eg. make git easier to use, autoformat your code on save, have multiple cursors simultaneously).
 
-The [FAQ](faq.md) provides links to short guides on how to install some of the editors and configure them as proper python development environments.
+The [FAQ](FAQ.md) provides links to short guides on how to install some of the editors and configure them as proper python development environments.
 
 
 ## Code related:
@@ -35,4 +36,4 @@ code with the time that you have saved avoiding those debates.
 This is a great resource to provide some high level guidance on better using a wide range of tools. For example, shell scripts, command line tools, git, debugging, and profiling. 
  - [Stuff Everyone Knows Except You](https://www.hackreactor.com/blog/laurie-voss-cto-of-npm-gives-engineering-fundamentals-talk): 
 This is a great talk covering a wide range of topics. It packs in loads of technical tips and life advice. 
- - See also the [FAQ](faq.md) for more info!
+ - See also the [FAQ](FAQ.md) for more info!
