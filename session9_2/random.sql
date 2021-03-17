@@ -22,6 +22,7 @@ CREATE TABLE TEST3 (
     z INT DEFAULT(ABS(RANDOM() / 17592186044416))
 );
 
+
 -- PUT RANDOM DATA IN THEM
 INSERT INTO TEST1 (id) WITH TempIDs(id) AS
   (VALUES(1) UNION ALL SELECT id+1 FROM TempIDs WHERE id < 10000 )
@@ -35,23 +36,32 @@ INSERT INTO TEST3 (id) WITH TempIDs(id) AS
   (VALUES(1) UNION ALL SELECT id+1 FROM TempIDs WHERE id < 10000 )
   SELECT id FROM TempIDs;
 
-
+SELECT "WHAT WE HAVE IN TABLES";
 -- Now we have 3 large tables with random numbers in them
 SELECT COUNT(*) AS TEST1SIZE FROM TEST1;
 SELECT COUNT(*) AS TEST2SIZE FROM TEST2;
 SELECT COUNT(*) AS TEST3SIZE FROM TEST3;
 
+--CREATE INDEX Test1_idx ON TEST1(x,y,z);
+--CREATE INDEX Test2_idx ON TEST2(x,y,z);
+--CREATE INDEX Test3_idx ON TEST3(x,y,z);
+
 SELECT * FROM TEST1 LIMIT 10;
 
 SELECT "SLOW QUERY";
-
 EXPLAIN QUERY PLAN SELECT COUNT(*) FROM TEST1 t1
-    JOIN TEST2 t2 ON (t1.x) = (t2.x)
-    JOIN TEST3 t3 ON (t1.y) = (t3.y)
-    WHERE t3.z > t1.z;
+   JOIN TEST2 t2 ON (t1.x) = (t2.x)
+   JOIN TEST3 t3 ON (t1.y) = (t3.y)
+   WHERE t3.z > t1.z; 
 
 .timer ON
 SELECT COUNT(*) FROM TEST1 t1
     JOIN TEST2 t2 ON (t1.x) = (t2.x)
     JOIN TEST3 t3 ON (t1.y) = (t3.y)
     WHERE t3.z > t1.z;
+
+
+
+-- Old: Run Time: real 0.022 user 0.021093 sys 0.000950
+--      Run Time: real 0.030 user 0.005835 sys 0.003617
+-- New: Run Time: real 0.130 user 0.129002 sys 0.000337
